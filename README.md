@@ -1,1 +1,1 @@
-# fpgaspaceinvaders
+# FPGA SPACE INVADERS
