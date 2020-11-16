@@ -129,7 +129,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 		.key_external_connection_export    (KEY),            //key_external_connection.export
 
 		//SDRAM
-		.clk_sdram_clk(DRAM_CLK),                            //clk_sdram.clk
+		.sdram_clk_clk(DRAM_CLK),                            //clk_sdram.clk
 		.sdram_wire_addr(DRAM_ADDR),                         //sdram_wire.addr
 		.sdram_wire_ba(DRAM_BA),                             //.ba
 		.sdram_wire_cas_n(DRAM_CAS_N),                       //.cas_n
@@ -161,5 +161,36 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 
 //instantiate a vga_controller, ball, and color_mapper here with the ports.
 
+vga_controller u1( 
+				.Clk(Clk),
+				.Reset(Reset_h),
+				.hs(VGA_HS),
+				.vs(vssig),
+				.pixel_clk(VGA_Clk),
+				.blank(blank),
+				.sync(sync),
+				.DrawX(drawxsig),
+				.DrawY(drawysig)
+	);
+
+assign VGA_VS = vssig;
+
+ball u2(.Reset(Reset_h),
+		.frame_clk(vssig),
+		.keycode(keycode),
+    	.BallX(ballxsig),
+		.BallY(ballysig),
+		.BallS(ballsizesig)
+		);
+
+color_mapper u3( .BallX(ballxsig),
+				.BallY(ballysig),
+				.DrawX(drawxsig),
+				.DrawY(drawysig),
+				.Ball_size(ballsizesig),
+				.Red(Red),
+				.Green(Green),
+				.Blue(Blue)
+				);
 
 endmodule
