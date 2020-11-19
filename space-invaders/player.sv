@@ -53,8 +53,8 @@ module player(
                       need_move <= 2;
                       shoot <= 0;
                     end
-                else if(keycode == 8'hXX) // NEED TO ADD SPACE KEYCODE HERE, NOT SURE WHAT THIS IS
-                    shoot <= 1;
+                // else if(keycode == 8'hXX) // NEED TO ADD SPACE KEYCODE HERE, NOT SURE WHAT THIS IS
+                //     shoot <= 1;
                 else
                 begin
                     player_X_Motion <= 0;
