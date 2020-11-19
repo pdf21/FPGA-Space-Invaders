@@ -1,5 +1,5 @@
 module player(
-    input reset, input [7:0] keycode,
+    input Reset, input frame_clk, input [7:0] keycode,
     output[9:0] player_X, player_s
     output shoot_bullet
 );
@@ -11,6 +11,8 @@ module player(
     parameter [9:0] player_X_Min=0;       // Leftmost point on the X axis
     parameter [9:0] player_X_Max=639;     // Rightmost point on the X axis
     parameter [9:0] player_X_Step= 1;      // Step size on the X axis
+
+
 
     assign player_size = 4;  //NEED TO DETERMINE SIZE
 
