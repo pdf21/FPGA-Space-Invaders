@@ -27,6 +27,7 @@ begin: bullet_move
             begin
                 exists <= 1'b1;
                 bullet_Y_motion <= bullet_Y_step;
+                bullet_Y_pos <= bullet_Y_start;
             end
 
             if(bullet_Y_max >= bullet_Y_pos + bullet_Y_motion || hit == 1'b1) // reaches ceiling / is hit.

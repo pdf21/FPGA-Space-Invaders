@@ -14,7 +14,7 @@ module player(
 
 
 
-    assign player_size = 4;  //NEED TO DETERMINE SIZE
+    assign player_size = /* NEED TO ADD SIZE */;  //NEED TO DETERMINE SIZE
 
 
    
@@ -24,7 +24,7 @@ module player(
         begin 
 				player_X_Motion <= 10'd0; //player_X_Step;
 				player_X_Pos <= player_X_Center;
-                shoot = 0;
+        shoot = 0;
         end
            
         else 
@@ -51,7 +51,6 @@ module player(
                     begin
                       player_X_Motion <= player_X_Step;
                       need_move <= 2;
-                      shoot <= 0;
                     end
                 // else if(keycode == 8'hXX) // NEED TO ADD SPACE KEYCODE HERE, NOT SURE WHAT THIS IS
                 //     shoot <= 1;
