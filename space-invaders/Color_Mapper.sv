@@ -13,7 +13,25 @@
 //-------------------------------------------------------------------------
 
 
+/* 
+
+    ***************************** start screen *****************************
+        inputs: is_start_title, is_start_message
+                start_title_hex_data, start_message_hex_data
+
+    ***************************** in game *****************************
+        inputs: is_enemy, is_player, is_bullet
+            enemy_data, player_data, bullet_data
+
+    ***************************** post game *****************************
+
+*/
+
 module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
+                                          enemy_on, player_on, bullet_on,
+                                    [7:0] enemy_R, enemy_G, enemy_B,
+                                          player_R, player_G, player_B,
+                                          bullet_R, bullet_G, bullet_B,
                        output logic [7:0]  Red, Green, Blue );
     
     logic ball_on;
@@ -36,28 +54,37 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
     assign DistY = DrawY - BallY;
     assign Size = Ball_size;
 	  
-    always_comb
-    begin:Ball_on_proc
-        if ( ( DistX*DistX + DistY*DistY) <= (Size * Size) ) 
-            ball_on = 1'b1;
-        else 
-            ball_on = 1'b0;
-     end 
+    //always_comb
+    //begin:Ball_on_proc
+    //    if ( ( DistX*DistX + DistY*DistY) <= (Size * Size) ) 
+    //        ball_on = 1'b1;
+    //    else 
+     //       ball_on = 1'b0;
+     //end 
        
     always_comb
     begin:RGB_Display
-        if ((ball_on == 1'b1)) 
-        begin 
-            Red = 8'hff;
-            Green = 8'h55;
-            Blue = 8'h00;
-        end       
-        else 
-        begin 
-            Red = 8'h00; 
-            Green = 8'h00;
-            Blue = 8'h7f - DrawX[9:3];
-        end      
+        // check if player on
+        if(player_on == 1'b1)
+        begin
+            R <= player_R;
+            G <= player_G;
+            B <= player_B;
+        end
+        // check if enemy on
+        if(enemy_on == 1'b1) 
+        begin
+            R <= enemy_R;
+            G <= enemy_G;
+            B <= enemy_B;
+        end
+        // check if bullet on
+        if(bullet_on == 1'b1)
+        begin
+            R <= bullet_R;
+            G <= bullet_G;
+            B <= bullet_B;
+        end
     end 
     
 endmodule
