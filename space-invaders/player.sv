@@ -69,3 +69,5 @@ module player(
     assign Player_X = player_X_Pos;
     assign shoot_bullet = shooting;
     assign player_s = player_size;
+
+endmodule;

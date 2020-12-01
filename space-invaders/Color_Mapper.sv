@@ -29,7 +29,8 @@
 
 module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
                                           enemy_on, player_on, bullet_on,
-                                    [7:0] enemy_R, enemy_G, enemy_B,
+                                    input start, //for purely the start screen, color not neeed.
+                        input [7:0] enemy_R, enemy_G, enemy_B,
                                           player_R, player_G, player_B,
                                           bullet_R, bullet_G, bullet_B,
                        output logic [7:0]  Red, Green, Blue );
@@ -50,20 +51,31 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
 	  
     int DistX, DistY, Size;
-	 assign DistX = DrawX - BallX;
+	assign DistX = DrawX - BallX;
     assign DistY = DrawY - BallY;
     assign Size = Ball_size;
-	  
-    //always_comb
-    //begin:Ball_on_proc
-    //    if ( ( DistX*DistX + DistY*DistY) <= (Size * Size) ) 
-    //        ball_on = 1'b1;
-    //    else 
-     //       ball_on = 1'b0;
-     //end 
+
+
+
        
     always_comb
     begin:RGB_Display
+        // check if start is on.
+        if(start == 1'b1 &&
+			DrawX >= 280 &&
+			DrawX < 360 &&
+			DrawY >= 208 &&
+			DrawY < 272)
+        begin
+            R <= 8'hFF;
+            G <= 8'hFF;
+            B <= 8'hFF;
+        end
+        else begin
+            R <= 8'h00;
+            G <= 8'h00;
+            B <= 8'h00;
+        end
         // check if player on
         if(player_on == 1'b1)
         begin

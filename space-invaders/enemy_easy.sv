@@ -38,8 +38,6 @@ module enemy_easy(
     
     // always happens:
     always_comb begin
-
-
         if(enemy_on == 1'b1) begin
             enemy_R <= enemy_sprite_R;
             enemy_G <= enemy_sprite_G;
@@ -155,6 +153,5 @@ module enemy_easy(
 //             enemy_B <= enemy_Sprite_B;            
 //         end
 //     end
-
-// endmodule
+endmodule
 
