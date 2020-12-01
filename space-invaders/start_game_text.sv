@@ -1,5 +1,10 @@
+module start_logic(
+    input Reset,
+    input 
+);
+
 module start_game_text(
-    input [7:0] address,
+    input [10:0] address,
     output [7:0] out_data
 );
     parameter ADDR_WIDTH = 11;
