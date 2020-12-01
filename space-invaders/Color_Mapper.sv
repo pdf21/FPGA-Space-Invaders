@@ -71,11 +71,6 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
             G <= 8'hFF;
             B <= 8'hFF;
         end
-        else begin
-            R <= 8'h00;
-            G <= 8'h00;
-            B <= 8'h00;
-        end
         // check if player on
         if(player_on == 1'b1)
         begin
@@ -97,6 +92,12 @@ module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
             G <= bullet_G;
             B <= bullet_B;
         end
+        else begin // black background
+            R <= 8'h00;
+            G <= 8'h00;
+            B <= 8'h00;
+        end
+
     end 
     
 endmodule

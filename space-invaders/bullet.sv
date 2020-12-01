@@ -23,7 +23,7 @@ begin: bullet_move
         bullet_Y_pos <= bullet_Y_start;
     end
     else begin
-            if(keycode == 8'hXX) // keycode for space
+            if(keycode == 8'h00) // keycode for space
             begin
                 exists <= 1'b1;
                 bullet_Y_motion <= bullet_Y_step;
