@@ -4,7 +4,15 @@ module bullet(
     input [9:0] player_X_position,
     output [9:0] bullet_X, bullet_Y
     output bullet_on_screen // logic for whether or not the bullet should be there.
+    // input reset, frame_clk
+    // input [9:0] player_Xcord,
+    // input fire,
+    // input collided,
+
+    // output exists,
+    // output [9:0] bullet_X, bullet_Y
 );
+
 
 logic [9:0] bullet_X_pos, bullet_Y_pos, bullet_Y_motion, bullet_size;
 logic exists, travel;
@@ -52,4 +60,3 @@ assign bullet_Y = bullet_Y_position;
 assign bullet_on_screen = travel;
 
 endmodule
-
