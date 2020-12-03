@@ -10,11 +10,11 @@ module  alien_shipRAM
 		input [18:0] write_address, read_address,
 		input we, Clk,
 
-		output logic [4:0] data_Out
+		output logic [23:0] data_Out
 );
 
 // mem has width of 3 bits and a total of 400 addresses
-logic [2:0] mem [0:1439];
+logic [23:0] mem [0:2199];
 
 initial
 begin

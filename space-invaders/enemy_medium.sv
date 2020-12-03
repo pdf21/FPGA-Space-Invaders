@@ -13,7 +13,7 @@ module enemy_easy(
     parameter enemy_step_X, enemy_step_Y;
 
     int IMAGE_WIDTH = 9'd50; 
-    int IMAGE_HEIGHT = 9'd50;
+    int IMAGE_HEIGHT = 9'd44;
 
     logic [18:0] pos; //position inside memory ARRAY
     // find position in memory : DrawX - startX
@@ -27,7 +27,7 @@ module enemy_easy(
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
 
-    alienRAM my_alien(
+    alien_shipRAM my_alien_ship(
         .data_in(5'b0),
         .write_address(19'b0),
         .read_address(read_addr),
@@ -38,7 +38,6 @@ module enemy_easy(
     // 2 always: outputs of each state
              //  handling of next state
     // accessing memory = row no * width + col no
-    
     // always happens:
     always_comb begin
         if(enemy_on == 1'b1) begin
@@ -111,4 +110,3 @@ module enemy_easy(
     end
     
 endmodule
-
