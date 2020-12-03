@@ -1,4 +1,4 @@
-module enemy_easy(
+module enemy_hard(
     input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
@@ -26,7 +26,7 @@ module enemy_easy(
         NEXT_LINE       // wait for next row
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
-   
+    
     always_ff @(posedge frame_clk) begin
         if(enemy_direction_X == 0'b0) begin
             enemy_x <= enemy_x - 1;
@@ -39,7 +39,7 @@ module enemy_easy(
         end
     end
     
-    alienRAM my_alien(
+    pink_invaderRAM my_pink_invader(
         .data_in(5'b0),
         .write_address(19'b0),
         .read_address(read_addr),
@@ -50,7 +50,6 @@ module enemy_easy(
     // 2 always: outputs of each state
              //  handling of next state
     // accessing memory = row no * width + col no
-    
     // always happens:
     always_comb begin
         if(enemy_on == 1'b1) begin
@@ -123,4 +122,3 @@ module enemy_easy(
     end
     
 endmodule
-

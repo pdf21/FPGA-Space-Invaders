@@ -13,7 +13,7 @@ module  pink_invaderRAM
 		output logic [23:0] data_Out
 );
 
-// mem has width of 3 bits and a total of 400 addresses
+// mem has width of 24 bits and a total of 2500 addresses
 logic [23:0] mem [0:2499];
 
 initial

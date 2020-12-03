@@ -1,5 +1,5 @@
-module enemy_easy(
-    input   logic Reset, input logic frame_clk, input logic [7:0] keycode,
+module enemy_medium(
+    input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
     input   logic [9:0] enemy_start_x, enemy_start_y,
@@ -27,12 +27,24 @@ module enemy_easy(
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
 
+    always_ff @(posedge frame_clk) begin
+        if(enemy_direction_X == 0'b0) begin
+            enemy_x <= enemy_x - 1;
+        end
+        else begin
+            enemy_x <= enemy_x + 1;
+        end
+        if(enemy_direction_X == 1)begin
+            enemy_y <= enemy_y - 1;
+        end
+    end
+
     alien_shipRAM my_alien_ship(
         .data_in(5'b0),
         .write_address(19'b0),
         .read_address(read_addr),
         .we(0'b0),
-        .Clk(frame_clk),
+        .Clk(Clk),
         .data_out({enemy_sprite_R, enemy_sprite_G, enemy_sprite_B})
     );
     // 2 always: outputs of each state
@@ -52,7 +64,7 @@ module enemy_easy(
         end 
     end
 
-    always_ff @ (posedge frame_clk) begin
+    always_ff @ (posedge Clk) begin
            state <= state_next;
 
            if(state == START)begin
