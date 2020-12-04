@@ -1,10 +1,7 @@
-module enemy_hard(
+module enemy_medium(
     input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
-    input   logic enemy_direction_X, // 0 = move left, 1 = move right
-    input   logic enemy_direction_Y, // 0 = stay, 1 = move down
-    input   logic [9:0] enemy_start_x, enemy_start_y,
     input   logic [9:0] DrawX, DrawY,
-    input   logic start,
+    input   logic start_background,
     output  logic enemy_on,
     output  logic [7:0] enemy_R, enemy_G, enemy_B
 );
@@ -12,8 +9,8 @@ module enemy_hard(
     logic   [9:0] enemy_x, enemy_y, next_enemy_y;
     parameter enemy_step_X, enemy_step_Y;
 
-    int IMAGE_WIDTH = 9'd50; 
-    int IMAGE_HEIGHT = 9'd50;
+    int IMAGE_WIDTH = 9'd640; 
+    int IMAGE_HEIGHT = 9'd480;
 
     logic [18:0] pos; //position inside memory ARRAY
     // find position in memory : DrawX - startX
@@ -25,25 +22,10 @@ module enemy_hard(
         DRAW,           // output the RGB
         NEXT_LINE       // wait for next row
     } state, next_state;
-    // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE 
-
-    // enemy_data module 
-
-    always_ff @(posedge frame_clk) begin
-        if(enemy_direction_X == 1'b0) begin
-            enemy_x <= enemy_x - 1;
-        end
-        else begin
-            enemy_x <= enemy_x + 1;
-        end
-        if(enemy_direction_Y == 1)begin
-            enemy_y <= enemy_y - 1;
-        end
-    end
-    
+    // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
 
 
-    pink_invaderRAM my_pink_invader(
+    backgroundRAM my_background(
         .data_in(5'b0),
         .write_address(19'b0),
         .read_address(read_addr),
@@ -78,7 +60,7 @@ module enemy_hard(
            end
 
            if(state == AWAIT_POS)begin
-               enemy_x <= 0;
+               enemy_x<= 0;
                enemy_on <= 1'b0;
            end
 
@@ -110,16 +92,12 @@ module enemy_hard(
         final_line = (enemy_y == IMAGE_HEIGHT - 1);
     end
     
-    logic [9:0] temp_Draw_X;
-    logic [9:0] temp_Draw_Y;
+
     always_comb begin
-        temp_Draw_X = Draw_X - enemy_start_x;
-        temp_Draw_Y = Draw_Y - enemy_start_Y;
-        assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
         case(state)
-            IDLE:       state_next = start & ready ? START: IDLE;
+            IDLE:       state_next = start_background ? START: IDLE;
             START:      state_next = AWAIT_POS;
-            AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
+            AWAIT_POS:  state_next = enemy_x == Draw_X ? DRAW : AWAIT_POS;
             DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
             default:    state_next = IDLE;
