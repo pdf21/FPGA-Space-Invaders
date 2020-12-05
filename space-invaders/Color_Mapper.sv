@@ -27,36 +27,39 @@
 
 */
 
-module  color_mapper ( input        [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
-                                          enemy_on, player_on, bullet_on,
-                                    input start, //for purely the start screen, color not neeed.
+module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
+                        input bullet_in
+                        input start, //for purely the start screen, color not neeed.
+                        input [9:0] bulletX, bulletY,
                         input [7:0] enemy_R, enemy_G, enemy_B,
-                                          player_R, player_G, player_B,
-                                          bullet_R, bullet_G, bullet_B,
+                        player_R, player_G, player_B,
+                        bullet_R, bullet_G, bullet_B,
+                        background_R, background_G, background_B,
                        output logic [7:0]  Red, Green, Blue );
     
-    logic ball_on;
-	 
- /* Old Ball: Generated square box by checking if the current pixel is within a square of length
-    2*Ball_Size, centered at (BallX, BallY).  Note that this requires unsigned comparisons.
-	 
-    if ((DrawX >= BallX - Ball_size) &&
-       (DrawX <= BallX + Ball_size) &&
-       (DrawY >= BallY - Ball_size) &&
-       (DrawY <= BallY + Ball_size))
-
-     New Ball: Generates (pixelated) circle by using the standard circle formula.  Note that while 
-     this single line is quite powerful descriptively, it causes the synthesis tool to use up three
-     of the 12 available multipliers on the chip!  Since the multiplicants are required to be signed,
-	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
+    logic ball_on, bullet_on;
 	  
     int DistX, DistY, Size;
 	assign DistX = DrawX - BallX;
     assign DistY = DrawY - BallY;
     assign Size = Ball_size;
 
+    //Bullet should just be a straight vertical line of size 3 pixels. We can
+    //adjust this according to however we want.
 
+    int bullet_distY;
+    assign bullet_distY = DrawY - bulletY;
 
+    always_comb
+    begin: bullet_on_proc
+        if(bullet_in)
+        begin
+            if(bullet_distY < 4 && bulletX == DrawX)
+                bullet_on = 1'b1;
+        end
+        else
+            bullet_on = 1'b0;
+    end
        
     always_comb
     begin:RGB_Display
