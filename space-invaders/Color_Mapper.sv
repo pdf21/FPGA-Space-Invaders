@@ -35,10 +35,11 @@ module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
                         player_R, player_G, player_B,
                         bullet_R, bullet_G, bullet_B,
                         background_R, background_G, background_B,
+                        output logic collision
                        output logic [7:0]  Red, Green, Blue );
     
     logic ball_on, bullet_on;
-	  
+	logic temp_collide; 
     int DistX, DistY, Size;
 	assign DistX = DrawX - BallX;
     assign DistY = DrawY - BallY;
@@ -70,7 +71,7 @@ module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
 			DrawY >= 208 &&
 			DrawY < 272)
         begin
-            R <= 8'hFF;
+            R <= 8'hFF; // The start screen should just be a graphic with one color, easy.
             G <= 8'hFF;
             B <= 8'hFF;
         end
@@ -84,22 +85,22 @@ module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
         // check if enemy on
         if(enemy_on == 1'b1) 
         begin
-            R <= enemy_R;
-            G <= enemy_G;
-            B <= enemy_B;
+            if(bullet_on)
+            begin
+                R <= background_R;
+                G <= background_G;
+                B <= background_B;
+                temp_collide <= 1'b1;
+            end else
+            begin
+                R <= 8'hFF; // default color for bullet
+                G <= 8'hFF;
+                B <= 8'hFF; 
+                temp_collide <= 1'b0;
+            end
         end
-        // check if bullet on
-        if(bullet_on == 1'b1)
-        begin
-            R <= bullet_R;
-            G <= bullet_G;
-            B <= bullet_B;
-        end
-        else begin // black background
-            R <= 8'h00;
-            G <= 8'h00;
-            B <= 8'h00;
-        end
+
+
 
     end 
     
