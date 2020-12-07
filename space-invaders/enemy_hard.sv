@@ -2,7 +2,7 @@ module enemy_hard(
     input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
-    input   logic [9:0] enemy_start_x, enemy_start_y,
+    input   logic [9:0] enemy_initial_x, enemy_initial_y,
     input   logic [9:0] DrawX, DrawY,
     input   logic start,
     output  logic enemy_on,
@@ -31,13 +31,13 @@ module enemy_hard(
 
     always_ff @(posedge frame_clk) begin
         if(enemy_direction_X == 1'b0) begin
-            enemy_x <= enemy_x - 1;
+            enemy_start_x <= enemy_start_x - 1;
         end
         else begin
-            enemy_x <= enemy_x + 1;
+            enemy_start_x <= enemy_start_x + 1;
         end
         if(enemy_direction_Y == 1)begin
-            enemy_y <= enemy_y - 1;
+            enemy_start_y <= enemy_start_y - 1;
         end
     end
     
@@ -95,6 +95,8 @@ module enemy_hard(
 
            if(Reset) begin
                state <= IDLE;
+            enemy_start_x = enemy_initial_x;
+               enemy_start_y = enemy_initial_y;
                enemy_x <= 0;
                enemy_y <= 0;
                pos <= 0;
@@ -123,6 +125,7 @@ module enemy_hard(
             DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
             default:    state_next = IDLE;
+        endcase
     end
     
 endmodule
