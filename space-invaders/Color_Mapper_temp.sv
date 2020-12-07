@@ -14,13 +14,15 @@
 
 
 module  color_mapper ( input [9:0] DrawX, DrawY, Ball_size,
+                        input [9:0] bulletX, bulletY,
+                        input
                         input [9:0] Player,
                        output logic [7:0]  Red, Green, Blue );
     
     logic ball_on;
 	  
     int DistX, DistY, Size;
-	 assign DistX = DrawX - BallX;
+	assign DistX = DrawX - BallX;
     assign DistY = DrawY - BallY;
     assign Size = Ball_size;
 	  

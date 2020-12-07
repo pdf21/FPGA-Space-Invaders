@@ -27,23 +27,24 @@
 
 */
 
-module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
-                        input bullet_in
-                        input start, //for purely the start screen, color not neeed.
+module  color_mapper (  input [9:0] DrawX, DrawY,
+                        input bullet_in, player_on,
+                        // input start, //for purely the start screen, color not neeed.
                         input [9:0] bulletX, bulletY,
-                        input [7:0] enemy_R, enemy_G, enemy_B,
-                        player_R, player_G, player_B,
-                        bullet_R, bullet_G, bullet_B,
-                        background_R, background_G, background_B,
-                        output logic collision
+                        input [23:0] bullet_color, player_color,
+                        // input [7:0] enemy_R, enemy_G, enemy_B,
+                        // player_R, player_G, player_B,
+                        // bullet_R, bullet_G, bullet_B,
+                        // background_R, background_G, background_B,
+                        // output logic collision
                        output logic [7:0]  Red, Green, Blue );
     
-    logic ball_on, bullet_on;
-	logic temp_collide; 
-    int DistX, DistY, Size;
-	assign DistX = DrawX - BallX;
-    assign DistY = DrawY - BallY;
-    assign Size = Ball_size;
+    logic VGA_R, VGA_G, VGA_B;
+    logic bullet_on;
+    assign Red = VGA_R;
+    assign Green = VGA_G;
+    assign Blue = VGA_B;
+
 
     //Bullet should just be a straight vertical line of size 3 pixels. We can
     //adjust this according to however we want.
@@ -62,45 +63,27 @@ module  color_mapper (  input [9:0] DrawX, DrawY, Ball_size,
             bullet_on = 1'b0;
     end
        
+    
     always_comb
     begin:RGB_Display
-        // check if start is on.
-        if(start == 1'b1 &&
-			DrawX >= 280 &&
-			DrawX < 360 &&
-			DrawY >= 208 &&
-			DrawY < 272)
+    if(bullet_on)
         begin
-            R <= 8'hFF; // The start screen should just be a graphic with one color, easy.
-            G <= 8'hFF;
-            B <= 8'hFF;
+            VGA_R = bullet_color[23:16];
+            VGA_G = bullet_color[15:8];
+            VGA_B = bullet_color[7:0];
         end
-        // check if player on
-        if(player_on == 1'b1)
+    else if(player_on)
         begin
-            R <= player_R;
-            G <= player_G;
-            B <= player_B;
+            VGA_R = player_color[23:16];
+            VGA_G = player_color[15:8];
+            VGA_B = player_color[7:0];
         end
-        // check if enemy on
-        if(enemy_on == 1'b1) 
+    else
         begin
-            if(bullet_on)
-            begin
-                R <= background_R;
-                G <= background_G;
-                B <= background_B;
-                temp_collide <= 1'b1;
-            end else
-            begin
-                R <= 8'hFF; // default color for bullet
-                G <= 8'hFF;
-                B <= 8'hFF; 
-                temp_collide <= 1'b0;
-            end
+            VGA_R = 8'h00;
+            VGA_G = 8'h00;
+            VGA_B = 8'h00;
         end
-
-
 
     end 
     
