@@ -1,9 +1,11 @@
 module enemy_array
 (
     input   logic   50CLK, frame_clk, Reset, Start,
+    output  logic   enemy_on,
+    output  logic   enemy_data
 );
     logic [9:0] L_Edge, R_Edge, U_Edge, D_Edge;
-    logic enemy_direction;
+    logic enemy_direction_X, enemy_direction_Y;
 enum {
     INIT,
     MOVE_LEFT,
@@ -27,15 +29,15 @@ always_ff @(posedge frame_clk)begin
     if(state == MOVE_LEFT) begin
         L_Edge <= L_Edge - 10'd01;
         R_Edge <= R_Edge - 10'd01;
-        enemy_direction_x <= 1'b0;
-        enemy_direction_y <= 1'b0;
+        enemy_direction_X <= 1'b0;
+        enemy_direction_Y <= 1'b0;
     end
 
     if(state == MOVE_RIGHT) begin
         L_Edge <= L_Edge + 10'd01;
         R_Edge <= R_Edge + 10'd01;        
-        enemy_direction_x <= 1'b1;
-        enemy_direction_y <= 1'b0;
+        enemy_direction_X <= 1'b1;
+        enemy_direction_Y <= 1'b0;
     end
 
     if(state == MOVE_DOWN_RIGHT) begin
@@ -44,7 +46,7 @@ always_ff @(posedge frame_clk)begin
         L_Edge <= L_Edge + 10'd01;
         R_Edge <= R_Edge + 10'd01;    
         enemy_direction_X <= 1'b1;
-        enemy_direction_y <= 1'b1;
+        enemy_direction_Y <= 1'b1;
     end
 
     if(state == MOVE_DOWN_LEFT) begin
@@ -53,7 +55,7 @@ always_ff @(posedge frame_clk)begin
         L_Edge <= L_Edge - 10'd01;
         R_Edge <= R_Edge - 10'd01;
         enemy_direction_X <= 1'b0;
-        enemy_direction_y <= 1'b1;
+        enemy_direction_Y <= 1'b1;
     end
 end
 
@@ -79,5 +81,23 @@ always_ff @(posedge 50CLK)begin
         MOVE_DOWN_RIGHT:state_next = MOVE_RIGHT;
         MOVE_DOWN_LEFT: state_next = MOVE_LEFT;
 end
+
+enemy_easy e_e1(
+    .Reset(),
+    .frame_clk,
+    .key,
+    .Clk(),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(), 
+    .enemy_initial_y(),
+    .DrawX(),
+    .DrawY(),
+    .start(),
+    .enemy_on(),
+    .enemy_R(),
+    .enemy_G(),
+    .enemy_B()
+);
 
 endmodule
