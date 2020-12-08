@@ -60,6 +60,7 @@ module lab8 (
 
 logic Reset_h, vssig, blank, sync, VGA_Clk;
 
+logic player_X, bulletsig;
 
 //=======================================================
 //  REG/WIRE declarations
@@ -175,19 +176,28 @@ vga_controller u1(
 
 assign VGA_VS = vssig;
 
-ball u2(.Reset(Reset_h),
+player u1(.Reset(Reset_h),
 		.frame_clk(vssig),
 		.keycode(keycode),
-    	.BallX(ballxsig),
-		.BallY(ballysig),
-		.BallS(ballsizesig)
+		.player_X(player_X)
+);
+
+bullet u2(.Reset(Reset_h),
+		.frame_clk(vssig),
+		.keycode(keycode),
+		.hit(), // input with collision later
+		.player_X_position(player_X),
+		.bullet_X(),
+		.bullet_Y()	
+		.bullet_on_screen(bulletsig)
 		);
 
-color_mapper u3( .BallX(ballxsig),
-				.BallY(ballysig),
-				.DrawX(drawxsig),
+color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),
-				.Ball_size(ballsizesig),
+				.bullet_in(bulletsig),
+				.player_on(),
+				.bullet_color(),
+				.player_color(),
 				.Red(Red),
 				.Green(Green),
 				.Blue(Blue)
