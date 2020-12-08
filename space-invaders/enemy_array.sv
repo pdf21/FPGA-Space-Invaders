@@ -1,6 +1,7 @@
 module enemy_array
 (
     input   logic   50CLK, frame_clk, Reset, Start,
+    input   logic   [9:0] DrawX, DrawY,
     output  logic   enemy_on,
     output  logic   enemy_data
 );
@@ -82,22 +83,119 @@ always_ff @(posedge 50CLK)begin
         MOVE_DOWN_LEFT: state_next = MOVE_LEFT;
 end
 
-enemy_easy e_e1(
-    .Reset(),
+/////////////                                       EASY ENEMIES                                  /////////////////////////
+logic ee1_on;
+logic   [7:0] ee1_R, ee1_G, ee1_B;
+enemy_easy ee1(
+    .Reset(Reset),
     .frame_clk,
-    .key,
-    .Clk(),
+    .Clk(50CLK),
     .enemy_direction_X,
     .enemy_direction_Y,
-    .enemy_initial_x(), 
-    .enemy_initial_y(),
-    .DrawX(),
-    .DrawY(),
-    .start(),
-    .enemy_on(),
-    .enemy_R(),
-    .enemy_G(),
-    .enemy_B()
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee1_on),
+    .enemy_R(ee1_R),
+    .enemy_G(ee1_G),
+    .enemy_B(ee1_B)
+);
+
+logic ee1_on;
+logic   [7:0] ee1_R, ee1_G, ee1_B;
+enemy_easy ee1(
+    .Reset(Reset),
+    .frame_clk,
+    .Clk(50CLK),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee1_on),
+    .enemy_R(ee1_R),
+    .enemy_G(ee1_G),
+    .enemy_B(ee1_B)
+);
+
+logic ee2_on;
+logic   [7:0] ee2_R, ee2_G, ee2_B;
+enemy_easy ee1(
+    .Reset(Reset),
+    .frame_clk,
+    .Clk(50CLK),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee1_on),
+    .enemy_R(ee2_R),
+    .enemy_G(ee2_G),
+    .enemy_B(ee2_B)
+);
+
+logic ee3_on;
+logic   [7:0] ee3_R, ee3_G, ee3_B;
+enemy_easy ee1(
+    .Reset(Reset),
+    .frame_clk,
+    .Clk(50CLK),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee3_on),
+    .enemy_R(ee3_R),
+    .enemy_G(ee3_G),
+    .enemy_B(ee3_B)
+);
+
+logic ee4_on;
+logic   [7:0] ee4_R, ee4_G, ee4_B;
+enemy_easy ee1(
+    .Reset(Reset),
+    .frame_clk,
+    .Clk(50CLK),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee4_on),
+    .enemy_R(ee4_R),
+    .enemy_G(ee4_G),
+    .enemy_B(ee4_B)
+);
+
+logic ee5_on;
+logic   [7:0] ee5_R, ee5_G, ee5_B;
+enemy_easy ee1(
+    .Reset(Reset),
+    .frame_clk,
+    .Clk(50CLK),
+    .enemy_direction_X,
+    .enemy_direction_Y,
+    .enemy_initial_x(10'b0), 
+    .enemy_initial_y(10'b0),
+    .DrawX,
+    .DrawY,
+    .start(Start),
+    .enemy_on(ee5_on),
+    .enemy_R(ee5_R),
+    .enemy_G(ee5_G),
+    .enemy_B(ee5_B)
 );
 
 endmodule
