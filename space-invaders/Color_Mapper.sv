@@ -31,7 +31,7 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
                         input bullet_in,
                         // input start, //for purely the start screen, color not neeed.
                         input [9:0] bulletX, bulletY, playerX,
-                        input [23:0] bullet_color, player_color,
+                        input [23:0] player_color,
                         // input [7:0] enemy_R, enemy_G, enemy_B,
                         // player_R, player_G, player_B,
                         // bullet_R, bullet_G, bullet_B,
@@ -51,7 +51,7 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
 
     int bullet_distY;
     assign bullet_distY = DrawY - bulletY;
-
+/*
     always_comb
     begin: bullet_on_proc
         if(bullet_in)
@@ -62,10 +62,11 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
         else
             bullet_on = 1'b0;
     end
+    */
 
     always_comb
     begin: player_on_proc
-        if(DrawY == 150 && DrawX == playerX) // 150 is the height on the screen of the player
+        if(DrawY >= 100 && DrawY <= 137 && DrawX == playerX) // 150 is the height on the screen of the player
             player_on = 1'b1;
         else
             player_on = 1'b0;
@@ -73,12 +74,12 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
        
     
     always_comb
-    begin:RGB_Display
-    if(bullet_on)
+    begin    
+    if(bullet_in && bullet_distY < 4 && bulletX == DrawX) // Draws the bullet.
         begin
-            VGA_R = bullet_color[23:16];
-            VGA_G = bullet_color[15:8];
-            VGA_B = bullet_color[7:0];
+            VGA_R = 8'hFF;
+            VGA_G = 8'hFF;
+            VGA_B = 8'hFF;
         end
     else if(player_on)
         begin

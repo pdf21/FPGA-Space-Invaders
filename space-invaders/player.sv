@@ -16,7 +16,6 @@ module player(
         begin 
           player_X_Motion <= 0; //player_X_Step;
           player_X_Pos <= player_X_Center;
-          shoot = 0;
         end           
         else 
         begin 					  
@@ -24,19 +23,16 @@ module player(
                         begin
                             player_X_Motion <= 0;
                             need_move <= 0;
-                            shoot <= 0;
                         end					  
             else if ( (player_X_Pos) <= player_X_Min )
                         begin
                           player_X_Motion <= 0;
                           need_move <= 1;
-                          shoot <= 0;
                         end
             else if (keycode == 8'h04 && need_move != 1) // A
                         begin
                           player_X_Motion <= (~(player_X_Step)+1'b1);
                           need_move <= 2;
-                          shoot <= 0;
                         end
             else if( keycode == 8'h07 && need_move != 0) // D
                     begin
@@ -53,4 +49,4 @@ module player(
     end       
     assign Player_X = player_X_Pos;
 
-endmodule;
+endmodule
