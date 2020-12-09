@@ -1,5 +1,5 @@
 module enemy_hard(
-    input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
+    input   logic Reset, frame_clk, Clk, delete_enemies, hit,
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
     input   logic [9:0] enemy_initial_x, enemy_initial_y,
@@ -93,6 +93,10 @@ module enemy_hard(
                enemy_on <= 1'b0;
            end
 
+            if(state == FINISHED) begin
+                enemy_on <= 1'b0;
+            end
+
            if(Reset) begin
                state <= IDLE;
             enemy_start_x = enemy_initial_x;
@@ -115,8 +119,8 @@ module enemy_hard(
     logic [9:0] temp_Draw_X;
     logic [9:0] temp_Draw_Y;
     always_comb begin
-        temp_Draw_X = Draw_X - enemy_start_x;
-        temp_Draw_Y = Draw_Y - enemy_start_Y;
+        temp_Draw_X <= Draw_X - enemy_start_x;
+        temp_Draw_Y <= Draw_Y - enemy_start_Y;
         assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
         case(state)
             IDLE:       state_next = start & ready ? START: IDLE;
@@ -126,6 +130,13 @@ module enemy_hard(
             NEXT_LINE:  state_next = AWAIT_POS;
             default:    state_next = IDLE;
         endcase
+        if(delete_enemies == 1'b1) begin
+            state_next <= FINISHED;
+        end
+
+        if(enemy_on == 1'b1 & hit ==1'b1) begin
+            state_next <= FINISHED;
+        end
     end
     
 endmodule
