@@ -1,11 +1,11 @@
-Fitter Status : Successful - Tue Dec 08 23:22:41 2020
+Fitter Status : Successful - Wed Dec 09 22:19:37 2020
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Space-Invaders
 Top-level Entity Name : lab8
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 3,859 / 49,760 ( 8 % )
+Total logic elements : 3,860 / 49,760 ( 8 % )
     Total combinational functions : 3,274 / 49,760 ( 7 % )
     Dedicated logic registers : 2,423 / 49,760 ( 5 % )
 Total registers : 2492
