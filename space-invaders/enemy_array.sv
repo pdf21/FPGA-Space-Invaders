@@ -92,7 +92,7 @@ end
 // next state handler
 always_ff @(posedge 50CLK)begin
     case(state)
-        INIT:           state_next = start ? MOVE_LEFT : INIT;
+        INIT:           state_next = start ? MOVE_RIGHT : INIT;
         MOVE_LEFT:      state_next = !reached_edge ? MOVE_LEFT : MOVE_DOWN_RIGHT;
         MOVE_RIGHT:     state_next = !reached_edge ? MOVE_RIGHT : MOVE_DOWN_LEFT;
         MOVE_DOWN_RIGHT:state_next = !reached_max ? MOVE_RIGHT : LOST;

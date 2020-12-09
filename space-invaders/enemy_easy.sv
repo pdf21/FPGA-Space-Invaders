@@ -30,22 +30,28 @@ module enemy_easy(
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
    
+    // 0 1 1 1 1 1
+    // 0 0 0 0 0 0
+    logic start_moving;
     always_ff @(posedge frame_clk) begin
-        if(enemy_direction_X == 0'b0) begin
-            enemy_start_x <= enemy_start_x - 1;
+        if(start_moving == 1'b1)begin
+            if(enemy_direction_X == 1'b0) begin
+                enemy_start_x <= enemy_start_x - 1;
+            end
+            else begin
+                enemy_start_x <= enemy_start_x + 1;
+            end
+            if(enemy_direction_Y == 1'b1)begin
+                enemy_start_y <= enemy_start_y + 1;
+            end    
         end
-        else begin
-            enemy_start_x <= enemy_start_x + 1;
-        end
-        if(enemy_direction_Y == 1)begin
-            enemy_start_y <= enemy_start_y + 1;
-        end
+        
     end
     
     alienRAM my_alien(
         .data_in(5'b0),
         .write_address(19'b0),
-        .read_address(read_addr),
+        .read_address(pos),
         .we(0'b0),
         .Clk(Clk),
         .data_out({enemy_sprite_R, enemy_sprite_G, enemy_sprite_B})
@@ -75,8 +81,13 @@ module enemy_easy(
                enemy_y <= 0;
                pos <= 0;
                enemy_on <= 1'b0;
+               start_moving <= 1'b1;
            end
-
+            // 0 0 0 0 0 0
+            // 0 1 1 1 0 0
+            // 0 1 1 1 0 0
+            // 0 1 1 1 0 0
+            // 0 0 0 0 0 0            
            if(state == AWAIT_POS)begin
                enemy_x<= 0;
                enemy_on <= 1'b0;
@@ -94,7 +105,7 @@ module enemy_easy(
            end
 
            if(state == FINISHED) begin
-               enemy_off <= 1'b0;
+               enemy_on <= 1'b0;
            end
 
            if(Reset) begin
@@ -116,6 +127,12 @@ module enemy_easy(
         final_line = (enemy_y == IMAGE_HEIGHT - 1);
     end
     
+
+            // 0 0 0 0 0 0
+            // 0 1 1 1 0 0
+            // 0 1 1 1 0 0
+            // 0 1 1 1 0 0
+            // 0 0 0 0 0 0  
     logic [9:0] temp_Draw_X;
     logic [9:0] temp_Draw_Y;
     always_comb begin
@@ -124,7 +141,7 @@ module enemy_easy(
         assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
         case(state)
             IDLE:       state_next = start & ready ? START: IDLE;
-            START:      state_next = AWAIT_POS;
+            START:      state_next = DRAW;
             AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
             DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
