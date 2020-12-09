@@ -4,13 +4,6 @@ module bullet(
     input hit,
     output [9:0] bullet_X, bullet_Y,
     output bullet_on_screen // logic for whether or not the bullet should be there.
-    // input reset, frame_clk
-    // input [9:0] player_Xcord,
-    // input fire,
-    // input collided,
-
-    // output exists,
-    // output [9:0] bullet_X, bullet_Y
 );
 
 
