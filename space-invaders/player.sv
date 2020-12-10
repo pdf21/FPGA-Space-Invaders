@@ -17,7 +17,6 @@ module player(
     
     logic [9:0] player_start_X, player_start_Y;
 
-    parameter offsetup = 32;
     int IMAGE_WIDTH = 10'd36;
     int IMAGE_HEIGHT = 10'd40;
     
