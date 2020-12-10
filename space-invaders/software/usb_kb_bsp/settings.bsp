@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 9, 2020 11:08:49 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1607530129480</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 10, 2020 2:32:25 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1607585545805</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\kant4\Desktop\FPGA-Space-Invaders\space-invaders\software\usb_kb_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab8_soc.sopcinfo</SopcDesignFile>

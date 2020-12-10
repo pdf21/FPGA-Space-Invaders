@@ -178,7 +178,7 @@ vga_controller u1(
 
 assign VGA_VS = vssig;
 
-player_spriteRAM u5(.data_In(),
+player_spriteRAM u5(.data_In(5'b00000),
 					.write_address(),
 					.read_address(),
 					.we(),
