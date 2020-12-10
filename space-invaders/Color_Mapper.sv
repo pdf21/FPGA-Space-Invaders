@@ -32,11 +32,7 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
                         // input start, //for purely the start screen, color not neeed.
                         input [9:0] bulletX, bulletY, playerX,
                         input [23:0] player_color,
-                        // input [7:0] enemy_R, enemy_G, enemy_B,
-                        // player_R, player_G, player_B,
-                        // bullet_R, bullet_G, bullet_B,
-                        // background_R, background_G, background_B,
-                        // output logic collision
+                        input player_on,
                        output logic [7:0]  Red, Green, Blue);
     
     logic VGA_R, VGA_G, VGA_B;
@@ -63,14 +59,6 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
             bullet_on = 1'b0;
     end
     */
-
-    always_comb
-    begin: player_on_proc
-        if(DrawY >= 100 && DrawY <= 137 && DrawX == playerX) // 150 is the height on the screen of the player
-            player_on = 1'b1;
-        else
-            player_on = 1'b0;
-    end
        
     
     always_comb
