@@ -178,18 +178,17 @@ vga_controller u1(
 
 assign VGA_VS = vssig;
 
-player_spriteRAM u5(.data_In(5'b00000),
-					.write_address(),
-					.read_address(),
-					.we(),
-					.Clk(Clk),
-					.data_Out(player_color)					
-					);
-
-player u4(.Reset(Reset_h),
-		.frame_clk(vssig),
-		.keycode(keycode),
-		.player_X(player_Xsig)
+player u4(
+	.Reset(Reset_h),
+	.frame_clk(VGA_Clk),
+	.Clk(Clk),
+	.keycode(keycode),
+	.start(key[0]),
+	.player_initial_x(9'd320),
+	.player_initial_y(9'd72),
+	.DrawX(DrawX), .DrawY(DrawY),
+	.player_on(player_on),
+	.player_color(player_color)
 );
 
 bullet u2(.Reset(Reset_h),
