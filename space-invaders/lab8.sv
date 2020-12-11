@@ -201,6 +201,23 @@ bullet u2(.Reset(Reset_h),
 		.bullet_on_screen(bulletsig)
 		);
 
+logic background_on;
+logic [7:0] bg_R, bg_G, bg_B;
+
+background my_background(
+	.Reset(Reset_h),
+	.frame_clk(VGA_Clk),
+	.Clk(pixel_clk),
+	.is_playing(is_playing),
+	.DrawX(drawxsig),
+	.DrawY(drawysig),
+	.start(start),
+	.enemy_on(background_on),
+	.bg_R,
+	.bg_G,
+	.bg_B
+);
+
 color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),
 				.bullet_in(bulletsig),
@@ -209,7 +226,14 @@ color_mapper u3(.DrawX(drawxsig),
 				.player_color(player_color),
 				.Red(Red),
 				.Green(Green),
-				.Blue(Blue)
+				.Blue(Blue).
+				.enemy_on,
+				.enemy_R,
+				.enemy_G,
+				.enemy_B,
+				.bg_R,
+				.bg_G,
+				.bg_B
 				);
 
 endmodule

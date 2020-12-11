@@ -1,5 +1,5 @@
-module enemy_easy(
-    input   logic Reset, frame_clk, Clk, delete_enemies, hit
+module enemy_medium(
+    input   logic Reset, frame_clk, Clk, delete_enemies, hit, is_playing
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
     input   logic [9:0] enemy_initial_x, enemy_initial_y,
@@ -26,32 +26,31 @@ module enemy_easy(
         AWAIT_POS,      // wait next horizontal position
         DRAW,           // output the RGB
         NEXT_LINE,       // wait for next row
-        FINISHED
+        FINISHED,
+        FIRST_IDLE
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
-   
-    // 0 1 1 1 1 1
-    // 0 0 0 0 0 0
-    logic start_moving;
+    initial begin
+        state <= BEFORE_GAME;
+    end
     always_ff @(posedge frame_clk) begin
-        if(start_moving == 1'b1)begin
-            if(enemy_direction_X == 1'b0) begin
+        if(state != BEFORE_GAME) begin
+            if(enemy_direction_X == 0'b0) begin
                 enemy_start_x <= enemy_start_x - 1;
             end
             else begin
                 enemy_start_x <= enemy_start_x + 1;
             end
-            if(enemy_direction_Y == 1'b1)begin
-                enemy_start_y <= enemy_start_y + 1;
-            end    
+            if(enemy_direction_X == 1)begin
+                enemy_start_y <= enemy_start_y - 1;
+            end            
         end
-        
     end
-    
+
     alienRAM my_alien(
         .data_in(5'b0),
         .write_address(19'b0),
-        .read_address(pos),
+        .read_address(read_addr),
         .we(0'b0),
         .Clk(Clk),
         .data_out({enemy_sprite_R, enemy_sprite_G, enemy_sprite_B})
@@ -59,7 +58,6 @@ module enemy_easy(
     // 2 always: outputs of each state
              //  handling of next state
     // accessing memory = row no * width + col no
-    
     // always happens:
     always_comb begin
         if(enemy_on == 1'b1) begin
@@ -81,13 +79,8 @@ module enemy_easy(
                enemy_y <= 0;
                pos <= 0;
                enemy_on <= 1'b0;
-               start_moving <= 1'b1;
            end
-            // 0 0 0 0 0 0
-            // 0 1 1 1 0 0
-            // 0 1 1 1 0 0
-            // 0 1 1 1 0 0
-            // 0 0 0 0 0 0            
+
            if(state == AWAIT_POS)begin
                enemy_x<= 0;
                enemy_on <= 1'b0;
@@ -99,24 +92,29 @@ module enemy_easy(
                enemy_on <= 1'b1;
            end
 
+            if(state == FIRST_IDLE) begin
+                enemy_y <= 0;
+                enemy_x <= 0;
+            end
+
            if(state == NEXT_LINE) begin
                enemy_y <= enemy_y + 1;
                enemy_on <= 1'b0;
            end
 
-           if(state == FINISHED) begin
-               enemy_on <= 1'b0;
-           end
+            if (state == FINISHED) begin
+                enemy_on <= 1'b0;
+            end
 
-           if(Reset) begin
-               state <= IDLE;
+            if (state == BEFORE_GAME) begin
+                
                enemy_start_x = enemy_initial_x;
-               enemy_start_y = enemy_initial_y;
+               enemy_start_y = enemy_initial_y;               
                enemy_x <= 0;
                enemy_y <= 0;
                pos <= 0;
                enemy_on <= 1'b0;
-           end
+            end
     end
              
     logic final_pixel;
@@ -127,25 +125,24 @@ module enemy_easy(
         final_line = (enemy_y == IMAGE_HEIGHT - 1);
     end
     
-
-            // 0 0 0 0 0 0
-            // 0 1 1 1 0 0
-            // 0 1 1 1 0 0
-            // 0 1 1 1 0 0
-            // 0 0 0 0 0 0  
     logic [9:0] temp_Draw_X;
     logic [9:0] temp_Draw_Y;
     always_comb begin
         temp_Draw_X <= Draw_X - enemy_start_x;
         temp_Draw_Y <= Draw_Y - enemy_start_Y;
         assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
+
+        // implement state to differentiate between start of frame and start drawing
         case(state)
-            IDLE:       state_next = start & ready ? START: IDLE;
-            START:      state_next = DRAW;
+            BEFORE_GAME: state_next = start ? FIRST_IDLE : BEFORE_GAME;
+            FIRST_IDLE: ready ? DRAW : FIRST_IDLE;
+            IDLE:       state_next = is_playing ? START : IDLE;
+            START:      state_next = AWAIT_POS;
             AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
-            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
+            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : FIRST_IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
-            default:    state_next = IDLE;
+            FINISHED: state_next = start ? FIRST_IDLE : FINISHED;
+            default:    state_next = BEFORE_GAME;            
         endcase
         if(delete_enemies == 1'b1) begin
             state_next <= FINISHED;
@@ -155,7 +152,9 @@ module enemy_easy(
             state_next <= FINISHED;
         end
 
+        if(Reset == 1'b1) begin
+            state_next <= BEFORE_GAME;
+        end
     end
     
 endmodule
-
