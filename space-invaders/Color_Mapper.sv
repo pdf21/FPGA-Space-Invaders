@@ -27,15 +27,15 @@
 
 */
 
-module  color_mapper (  input [9:0] DrawX, DrawY,
-                        input bullet_in,
+module  color_mapper (  input logic [9:0] DrawX, DrawY,
+                        input logic bullet_in,
                         // input start, //for purely the start screen, color not neeed.
-                        input [9:0] bulletX, bulletY,
-                        input [23:0] player_color,
-                      //  input [7:0] enemy_R, enemy_G, enemy_B,
-                        input player_on,
-                      //  input enemy_on,
-                        input [7:0] bg_R, bg_G, bg_B,
+                        input logic [9:0] bulletX, bulletY,
+                        input logic [23:0] player_color,
+                        input logic [7:0] enemy_R, enemy_G, enemy_B,
+                        input logic player_on,
+                        input logic enemy_on,
+                        input logic [7:0] bg_R, bg_G, bg_B,
                        output logic [7:0]  Red, Green, Blue);
     
     logic VGA_R, VGA_G, VGA_B;
@@ -74,6 +74,11 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
                 // VGA_G = entity_data_G;
                 // VGA_B = entity_data_B;
             end
+        else if (enemy_on) begin
+                VGA_R = enemy_R;
+                VGA_G = enemy_G;
+                VGA_B = enemy_B;
+        end
         else
             begin
                 VGA_R = bg_R;
