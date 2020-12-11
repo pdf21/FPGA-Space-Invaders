@@ -218,21 +218,21 @@ player u4(
 // 	.bg_B
 // );
 
-enemy_array my_enemy_array(
-	.Clk,
-	.frame_clk,
-	.Reset,
-	.Start,
-	.delete_enemies,
-	.hit,
-	.is_playing,
-	.DrawX,
-	.DrawY,
-	.enemy_on,
-	.enemy_R,
-	.enemy_G,
-	.enemy_B
-);
+// enemy_array my_enemy_array(
+// 	.Clk,
+// 	.frame_clk,
+// 	.Reset,
+// 	.Start,
+// 	.delete_enemies,
+// 	.hit,
+// 	.is_playing,
+// 	.DrawX,
+// 	.DrawY,
+// 	.enemy_on,
+// 	.enemy_R,
+// 	.enemy_G,
+// 	.enemy_B
+// );
 
 color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),

@@ -1,10 +1,10 @@
 module gameFSM(
-    input reset,  input clk, input player_start, input finished, 
-    output start, is_playing, is_finished
+    input logic reset,  input logic clk, input logic [7:0] keycode, input logic finished, 
+    output logic start, is_playing, is_finished
 );
 
 enum {
-    BEGIN,
+    BEGINNING,
     GAME_START,
     GAME_OVER,
     CONT
@@ -14,7 +14,7 @@ enum {
 always_ff @ (posedge clk) begin
     state <= next_state;
 
-    if(state == BEGIN) begin
+    if(state == BEGINNING) begin
         start <= 1'b0;
     end
 
@@ -36,13 +36,14 @@ end
 // handling next state
 always_ff @ (posedge clk) begin
     case (state)
-        BEGIN: next_state = player_start ? GAME_START : BEGIN;
+        BEGIN: next_state = (keycode > 0) ? GAME_START : BEGIN; // press any key
         GAME_START: next_state = CONT;
-        GAME_OVER: next_state = player_start ? GAME_START : GAME_OVER;
+        GAME_OVER: next_state = (keycode == 8'd44) ? GAME_START : GAME_OVER; // PRESS SPACE
         CONT: finished ? GAME_OVER : CONT;
         default: BEGIN;
     endcase
-    if(reset) begin
+    if(reset)
+    begin
         next_state = BEGIN;
     end
 end

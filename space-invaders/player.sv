@@ -13,6 +13,10 @@ module player(
     parameter [9:0] player_X_Step= 1;      // Step size on the X axis
     parameter [9:0] player_Y_Center = 420;
 
+initial begin
+  player_start_X = player_X_Center;
+  player_start_Y = player_Y_Center;
+end
 
     logic [9:0] player_start_X, player_start_Y; // position on screen
 
@@ -37,9 +41,11 @@ module player(
   //   player_start_X = player_X_Center;
   //   player_start_Y = player_Y_Center;
   //  end
+  // if drawX >= player X Pos && drawX < playerXPos + playerSize &&
 
    always_comb begin // Check when to draw
-     if(DrawX == player_start_X + player_X_Pos && DrawY == player_start_Y + player_Y_Pos)
+     if(DrawX >= player_start_X && DrawX < player_start_X + IMAGE_WIDTH
+     && DrawY >= player_start_Y && DrawY < player_start_Y + IMAGE_HEIGHT)
         start_draw = 1'b1;
       else
         start_draw = 1'b0;
@@ -63,11 +69,11 @@ module player(
         .write_address(19'b0),
         .read_address(read_address),
         .we(1'b0),
-        .Clk(frame_clk),
+        .Clk(Clk),
         .data_Out(player_color)
    );
   
-  always_ff @ (posedge frame_clk) begin
+  always_ff @ (posedge Clk) begin
     state <= next_state;
 
     if(state == START) begin

@@ -30,12 +30,12 @@
 module  color_mapper (  input [9:0] DrawX, DrawY,
                         input bullet_in,
                         // input start, //for purely the start screen, color not neeed.
-                      //  input [9:0] bulletX, bulletY, playerX,
+                        input [9:0] bulletX, bulletY,
                         input [23:0] player_color,
                       //  input [7:0] enemy_R, enemy_G, enemy_B,
                         input player_on,
                       //  input enemy_on,
-                      //  input [7:0] bg_R, bg_G, bg_B,
+                        input [7:0] bg_R, bg_G, bg_B,
                        output logic [7:0]  Red, Green, Blue);
     
     logic VGA_R, VGA_G, VGA_B;
@@ -55,18 +55,17 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
     
     // int bullet_distY;
     // assign bullet_distY = DrawY - bulletY;
-       
+    //&& bullet_distY < 4 && bulletX == DrawX
     
     always_comb
     begin    
-        // if(bullet_in && bullet_distY < 4 && bulletX == DrawX) // Draws the bullet.
-        //     begin
-        //         VGA_R = 8'hFF;
-        //         VGA_G = 8'hFF;
-        //         VGA_B = 8'hFF;
-        //     end
-        // else 
-        if(player_on)
+        if(bullet_in && DrawX == bulletX && DrawY < bulletY + 4 ) // Draws the bullet.
+            begin
+                VGA_R = 8'hFF;
+                VGA_G = 8'hFF;
+                VGA_B = 8'hFF;
+            end
+        else if(player_on)
             begin
                 VGA_R = player_color[23:16];
                 VGA_G = player_color[15:8];
@@ -77,9 +76,9 @@ module  color_mapper (  input [9:0] DrawX, DrawY,
             end
         else
             begin
-                VGA_R = 8'h20;
-                VGA_G = 8'h20;
-                VGA_B = 8'h20;
+                VGA_R = bg_R;
+                VGA_G = bg_G;
+                VGA_B = bg_B;
             end
             
     end 

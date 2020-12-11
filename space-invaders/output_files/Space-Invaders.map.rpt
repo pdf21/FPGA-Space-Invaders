@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Space-Invaders
-Fri Dec 11 20:21:27 2020
+Fri Dec 11 22:42:05 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -374,7 +374,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Dec 11 20:21:26 2020       ;
+; Analysis & Synthesis Status        ; Successful - Fri Dec 11 22:42:04 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Space-Invaders                              ;
 ; Top-level Entity Name              ; lab8                                        ;
@@ -7662,15 +7662,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "color_mapper:u3"                                                                           ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                             ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Red[3..0]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; Green[3..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; Blue[3..0]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "color_mapper:u3"                                                                                                                                    ;
++-------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                                                                                      ;
++-------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Red[3..0]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                          ;
+; Green[3..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                          ;
+; Blue[3..0]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                          ;
+; bulletX     ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; bulletY     ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++-------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -9193,7 +9195,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:16     ;
+; Top            ; 00:00:28     ;
 +----------------+--------------+
 
 
@@ -9203,7 +9205,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Dec 11 20:19:57 2020
+    Info: Processing started: Fri Dec 11 22:39:17 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Space-Invaders -c Space-Invaders
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -9369,7 +9371,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file color_m
     Info (12023): Found entity 1: color_mapper File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 30
 Info (12021): Found 1 design units, including 1 entities, in source file bullet.sv
     Info (12023): Found entity 1: bullet File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/bullet.sv Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at lab8.sv(223): created implicit net for "bulletsig" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 223
+Warning (10236): Verilog HDL Implicit Net warning at lab8.sv(239): created implicit net for "bulletsig" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 239
 Warning (10037): Verilog HDL or VHDL warning at lab8_soc_sdram.v(318): conditional expression evaluates to a constant File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8_soc/synthesis/submodules/lab8_soc_sdram.v Line: 318
 Warning (10037): Verilog HDL or VHDL warning at lab8_soc_sdram.v(328): conditional expression evaluates to a constant File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8_soc/synthesis/submodules/lab8_soc_sdram.v Line: 328
 Warning (10037): Verilog HDL or VHDL warning at lab8_soc_sdram.v(338): conditional expression evaluates to a constant File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8_soc/synthesis/submodules/lab8_soc_sdram.v Line: 338
@@ -9595,21 +9597,21 @@ Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_controller:
 Warning (10230): Verilog HDL assignment warning at VGA_controller.sv(76): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/VGA_controller.sv Line: 76
 Warning (10230): Verilog HDL assignment warning at VGA_controller.sv(79): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/VGA_controller.sv Line: 79
 Info (12128): Elaborating entity "player" for hierarchy "player:u4" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 192
-Warning (10230): Verilog HDL assignment warning at player.sv(50): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 50
-Warning (10230): Verilog HDL assignment warning at player.sv(52): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 52
-Warning (10230): Verilog HDL assignment warning at player.sv(85): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 85
-Warning (10230): Verilog HDL assignment warning at player.sv(86): truncated value with size 32 to match size of target (19) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 86
+Warning (10230): Verilog HDL assignment warning at player.sv(56): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 56
+Warning (10230): Verilog HDL assignment warning at player.sv(58): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 58
 Warning (10230): Verilog HDL assignment warning at player.sv(91): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 91
-Info (12128): Elaborating entity "player_spriteRAM" for hierarchy "player:u4|player_spriteRAM:player_inst" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 68
-Info (12128): Elaborating entity "color_mapper" for hierarchy "color_mapper:u3" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 236
-Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(71): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 71
+Warning (10230): Verilog HDL assignment warning at player.sv(92): truncated value with size 32 to match size of target (19) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 92
+Warning (10230): Verilog HDL assignment warning at player.sv(97): truncated value with size 32 to match size of target (10) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 97
+Info (12128): Elaborating entity "player_spriteRAM" for hierarchy "player:u4|player_spriteRAM:player_inst" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/player.sv Line: 74
+Info (12128): Elaborating entity "color_mapper" for hierarchy "color_mapper:u3" File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 252
 Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(72): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 72
 Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(73): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 73
-Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(80): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 80
+Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(74): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 74
 Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(81): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 81
 Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(82): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 82
+Warning (10230): Verilog HDL assignment warning at Color_Mapper.sv(83): truncated value with size 8 to match size of target (1) File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/Color_Mapper.sv Line: 83
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2020.12.11.20:20:45 Progress: Loading sld096a61b4/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2020.12.11.22:40:44 Progress: Loading sld096a61b4/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -9634,7 +9636,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/ip/s
     Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_splitter File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/db/ip/sld096a61b4/submodules/alt_sld_fab_alt_sld_fab_splitter.sv Line: 3
 Info (276014): Found 1 instances of uninferred RAM logic
     Info (276004): RAM logic "lab8_soc:u0|lab8_soc_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:sdram_s1_agent_rdata_fifo|mem" is uninferred due to inappropriate RAM size File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8_soc/synthesis/submodules/altera_avalon_sc_fifo.v Line: 108
-Warning (12241): 6 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (12241): 7 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13034): The following nodes have both tri-state and non-tri-state drivers
     Warning (13035): Inserted always-enabled tri-state buffer between "ARDUINO_IO[7]" and its non-tri-state driver. File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 53
     Warning (13035): Inserted always-enabled tri-state buffer between "ARDUINO_IO[10]" and its non-tri-state driver. File: C:/Users/kant4/Desktop/FPGA-Space-Invaders/space-invaders/lab8.sv Line: 53
@@ -9738,10 +9740,10 @@ Info (21057): Implemented 4813 device resources after synthesis - the final reso
     Info (21064): Implemented 144 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 112 warnings
-    Info: Peak virtual memory: 4963 megabytes
-    Info: Processing ended: Fri Dec 11 20:21:27 2020
-    Info: Elapsed time: 00:01:30
-    Info: Total CPU time (on all processors): 00:02:17
+    Info: Peak virtual memory: 4971 megabytes
+    Info: Processing ended: Fri Dec 11 22:42:05 2020
+    Info: Elapsed time: 00:02:48
+    Info: Total CPU time (on all processors): 00:03:20
 
 
 +------------------------------------------+
