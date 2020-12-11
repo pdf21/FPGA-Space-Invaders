@@ -70,9 +70,6 @@ module  color_mapper (  input logic [9:0] DrawX, DrawY,
                 VGA_R = player_color[23:16];
                 VGA_G = player_color[15:8];
                 VGA_B = player_color[7:0];
-                // VGA_R = entity_data_R;
-                // VGA_G = entity_data_G;
-                // VGA_B = entity_data_B;
             end
         else if (enemy_on) begin
                 VGA_R = enemy_R;
