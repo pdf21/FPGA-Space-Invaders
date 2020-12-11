@@ -1,6 +1,6 @@
 module enemy_array
 (
-    input   logic   50CLK, frame_clk, Reset, Start, delete_enemies, hit, is_playing(is_playing,
+    input   logic   Clk , frame_clk, Reset, Start, delete_enemies, hit, is_playing(is_playing,
     input   logic   [9:0] DrawX, DrawY,
     output  logic   enemy_on,
     output  logic   [7:0] enemy_R, enemy_G, enemy_B
@@ -90,7 +90,7 @@ end
 
 
 // next state handler
-always_ff @(posedge 50CLK)begin
+always_ff @(posedge Clk)begin
     case(state)
         INIT:           state_next = start ? MOVE_RIGHT : INIT;
         MOVE_LEFT:      state_next = !reached_edge ? MOVE_LEFT : MOVE_DOWN_RIGHT;
@@ -116,7 +116,7 @@ logic   [7:0] ee1_R, ee1_G, ee1_B;
 enemy_easy ee1(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -138,7 +138,7 @@ logic   [7:0] ee2_R, ee2_G, ee2_B;
 enemy_easy ee2(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -160,7 +160,7 @@ logic   [7:0] ee3_R, ee3_G, ee3_B;
 enemy_easy ee3(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -182,7 +182,7 @@ logic   [7:0] ee4_R, ee4_G, ee4_B;
 enemy_easy ee4(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -204,7 +204,7 @@ logic   [7:0] ee5_R, ee5_G, ee5_B;
 enemy_easy ee5(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -226,7 +226,7 @@ logic   [7:0] ee6_R, ee6_G, ee6_B;
 enemy_easy ee6(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -248,7 +248,7 @@ logic   [7:0] ee7_R, ee7_G, ee7_B;
 enemy_easy ee7(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -270,7 +270,7 @@ logic   [7:0] em1_R, em1_G, em1_B;
 enemy_medium em1(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -292,7 +292,7 @@ logic   [7:0] em2_R, em2_G, em2_B;
 enemy_medium em2(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -314,7 +314,7 @@ logic   [7:0] em3_R, em3_G, em3_B;
 enemy_medium em3(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -336,7 +336,7 @@ logic   [7:0] em4_R, em4_G, em4_B;
 enemy_medium em4(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -358,7 +358,7 @@ logic   [7:0] em5_R, em5_G, em5_B;
 enemy_medium em5(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -380,7 +380,7 @@ logic   [7:0] em6_R, em6_G, em6_B;
 enemy_medium em6(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -402,7 +402,7 @@ logic   [7:0] em7_R, em7_G, em7_B;
 enemy_medium em7(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -425,7 +425,7 @@ logic   [7:0] eh1_R, eh1_G, eh1_B;
 enemy_medium eh1(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -447,7 +447,7 @@ logic   [7:0] eh2_R, eh2_G, eh2_B;
 enemy_medium eh2(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -469,7 +469,7 @@ logic   [7:0] eh3_R, eh3_G, eh3_B;
 enemy_medium eh3(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -491,7 +491,7 @@ logic   [7:0] eh4_R, eh4_G, eh4_B;
 enemy_medium eh4(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -513,7 +513,7 @@ logic   [7:0] eh5_R, eh5_G, eh5_B;
 enemy_medium eh5(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -535,7 +535,7 @@ logic   [7:0] eh6_R, eh6_G, eh6_B;
 enemy_medium eh6(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
@@ -557,7 +557,7 @@ logic   [7:0] eh7_R, eh7_G, eh7_B;
 enemy_medium eh7(
     .Reset(Reset),
     .frame_clk,
-    .Clk(50CLK),
+    .Clk(Clk),
     .delete_enemies(delete_enemies),
     .hit(hit),
     .is_playing(is_playing),
