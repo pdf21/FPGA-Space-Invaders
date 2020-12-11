@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream
 14:38:03 **** Incremental Build of configuration Nios II for project usb_kb ****
+=======
+17:01:59 **** Incremental Build of configuration Nios II for project usb_kb ****
+>>>>>>> Stashed changes
 make all 
 Info: Building ../usb_kb_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../usb_kb_bsp/
 [BSP build complete]
 [usb_kb build complete]
 
+<<<<<<< Updated upstream
 14:38:05 Build Finished (took 2s.886ms)
+=======
+17:02:01 Build Finished (took 2s.32ms)
+>>>>>>> Stashed changes
 

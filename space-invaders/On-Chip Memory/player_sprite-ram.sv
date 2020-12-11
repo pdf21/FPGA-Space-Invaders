@@ -10,7 +10,7 @@ module  player_spriteRAM
 		input [18:0] write_address, read_address,
 		input we, Clk,
 
-		output logic [4:0] data_Out
+		output logic [23:0] data_Out
 );
 
 // mem has width of 3 bits and a total of 400 addresses

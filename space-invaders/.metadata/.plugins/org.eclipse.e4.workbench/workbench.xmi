@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_7gkp4Dq9EeurdObXel753Q" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_7gkp4Tq9EeurdObXel753Q" bindingContexts="_7gl5aDq9EeurdObXel753Q">
+<<<<<<< Updated upstream
   <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;MAX3421E.c&quot; tooltip=&quot;usb_kb/usb_kb/MAX3421E.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/usb_kb/usb_kb/MAX3421E.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;main.c&quot; tooltip=&quot;usb_kb/main.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/usb_kb/main.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+=======
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;main.c&quot; tooltip=&quot;usb_kb/main.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/usb_kb/main.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;MAX3421E.c&quot; tooltip=&quot;usb_kb/usb_kb/MAX3421E.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/usb_kb/usb_kb/MAX3421E.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+>>>>>>> Stashed changes
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_7gkp4Tq9EeurdObXel753Q" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_7gkp4jq9EeurdObXel753Q" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1024" height="768">
@@ -52,7 +56,11 @@
               <children xsi:type="advanced:Placeholder" xmi:id="_7gkp6Tq9EeurdObXel753Q" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_7glRtTq9EeurdObXel753Q"/>
               <children xsi:type="advanced:Placeholder" xmi:id="_7gkp6jq9EeurdObXel753Q" elementId="org.eclipse.ui.views.BookmarkView" toBeRendered="false" ref="_7glRtjq9EeurdObXel753Q"/>
             </children>
+<<<<<<< Updated upstream
             <children xsi:type="basic:PartSashContainer" xmi:id="_7gkp6zq9EeurdObXel753Q" containerData="7500" selectedElement="_7gkp7Dq9EeurdObXel753Q">
+=======
+            <children xsi:type="basic:PartSashContainer" xmi:id="_7gkp6zq9EeurdObXel753Q" containerData="7500" selectedElement="_7gkp8Dq9EeurdObXel753Q">
+>>>>>>> Stashed changes
               <children xsi:type="basic:PartSashContainer" xmi:id="_7gkp7Dq9EeurdObXel753Q" containerData="7500" selectedElement="_7gkp7Tq9EeurdObXel753Q" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_7gkp7Tq9EeurdObXel753Q" elementId="org.eclipse.ui.editorss" containerData="7500" ref="_7glRWTq9EeurdObXel753Q"/>
                 <children xsi:type="basic:PartStack" xmi:id="_7gkp7jq9EeurdObXel753Q" elementId="topRight" containerData="2500" selectedElement="_7gkp7zq9EeurdObXel753Q">
@@ -60,6 +68,10 @@
                 </children>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_7gkp8Dq9EeurdObXel753Q" elementId="bottom" containerData="2500" selectedElement="_7gkp8zq9EeurdObXel753Q">
+<<<<<<< Updated upstream
+=======
+                <tags>active</tags>
+>>>>>>> Stashed changes
                 <children xsi:type="advanced:Placeholder" xmi:id="_7gkp8Tq9EeurdObXel753Q" elementId="org.eclipse.ui.views.ProblemView" ref="_7glRtzq9EeurdObXel753Q"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_7gkp8jq9EeurdObXel753Q" elementId="org.eclipse.ui.views.TaskList" ref="_7glRuzq9EeurdObXel753Q"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_7gkp8zq9EeurdObXel753Q" elementId="org.eclipse.ui.console.ConsoleView" ref="_7glRvDq9EeurdObXel753Q"/>
@@ -90,6 +102,7 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_7glRWTq9EeurdObXel753Q" elementId="org.eclipse.ui.editorss" selectedElement="_7glRWjq9EeurdObXel753Q">
+<<<<<<< Updated upstream
       <children xsi:type="basic:PartStack" xmi:id="_7glRWjq9EeurdObXel753Q" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_7glRXDq9EeurdObXel753Q">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
@@ -99,14 +112,28 @@
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
+=======
+      <children xsi:type="basic:PartStack" xmi:id="_7glRWjq9EeurdObXel753Q" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_7glRWzq9EeurdObXel753Q">
+        <tags>org.eclipse.e4.primaryDataStack</tags>
+        <tags>EditorStack</tags>
+        <children xsi:type="basic:Part" xmi:id="_7glRWzq9EeurdObXel753Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="main.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;main.c&quot; partName=&quot;main.c&quot; title=&quot;main.c&quot; tooltip=&quot;usb_kb/main.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/usb_kb/main.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4787&quot; selectionTopPixel=&quot;3155&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+          <tags>activeOnClose</tags>
+>>>>>>> Stashed changes
         </children>
         <children xsi:type="basic:Part" xmi:id="_7glRXDq9EeurdObXel753Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MAX3421E.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;MAX3421E.c&quot; partName=&quot;MAX3421E.c&quot; title=&quot;MAX3421E.c&quot; tooltip=&quot;usb_kb/usb_kb/MAX3421E.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/usb_kb/usb_kb/MAX3421E.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;360&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
+<<<<<<< Updated upstream
           <tags>active</tags>
           <tags>activeOnClose</tags>
+=======
+>>>>>>> Stashed changes
           <menus xsi:type="menu:PopupMenu" xmi:id="_7glRXTq9EeurdObXel753Q" elementId="#CEditorContext">
             <tags>menuContribution:popup</tags>
             <tags>popup:#CEditorContext</tags>
@@ -175,6 +202,10 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
+<<<<<<< Updated upstream
+=======
+      <tags>active</tags>
+>>>>>>> Stashed changes
       <menus xmi:id="_7glRvTq9EeurdObXel753Q" elementId="org.eclipse.ui.console.ConsoleView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -238,7 +269,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_7glSGzq9EeurdObXel753Q" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< Updated upstream
         <children xsi:type="menu:HandledToolItem" xmi:id="_pRu9cDsWEeugC-jLqIMGiA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_7go9LTq9EeurdObXel753Q"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_s9qYADuXEeuDMuO7D_kuMg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_7go9LTq9EeurdObXel753Q"/>
+>>>>>>> Stashed changes
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_7glSKTq9EeurdObXel753Q" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -262,7 +297,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_7glSZjq9EeurdObXel753Q" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
+<<<<<<< Updated upstream
         <children xsi:type="menu:HandledToolItem" xmi:id="_pR1EEDsWEeugC-jLqIMGiA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_7go8nzq9EeurdObXel753Q"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_s9vQgDuXEeuDMuO7D_kuMg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_7go8nzq9EeurdObXel753Q"/>
+>>>>>>> Stashed changes
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_7glScTq9EeurdObXel753Q" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>

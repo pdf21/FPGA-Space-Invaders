@@ -120,8 +120,7 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 	assign VGA_B = Blue[7:4];
 	assign VGA_G = Green[7:4];
 
-logic player_X, bullet_Xsig, bullet_Ysig;
-logic [23:0] player_color;
+
 	
 	lab8_soc u0 (
 		.clk_clk                           (Clk),            //clk.clk
@@ -178,62 +177,63 @@ vga_controller u1(
 
 assign VGA_VS = vssig;
 
+logic player_X, bullet_Xsig, bullet_Ysig;
+logic [23:0] player_color;
+logic player_on;
+
 player u4(
 	.Reset(Reset_h),
 	.frame_clk(VGA_Clk),
 	.Clk(Clk),
 	.keycode(keycode),
-	.start(key[0]),
-	.player_initial_x(9'd320),
-	.player_initial_y(9'd72),
-	.DrawX(DrawX), .DrawY(DrawY),
+	.DrawX(drawxsig), .DrawY(drawysig),
 	.player_on(player_on),
 	.player_color(player_color)
 );
 
-bullet u2(.Reset(Reset_h),
-		.frame_clk(vssig),
-		.keycode(keycode),
-		.hit(), // input with collision later
-		.player_X_position(player_Xsig),
-		.bullet_X(bullet_Xsig),
-		.bullet_Y(bullet_Ysig),	
-		.bullet_on_screen(bulletsig)
-		);
+// bullet u2(.Reset(Reset_h),
+// 		.frame_clk(vssig),
+// 		.keycode(keycode),
+// 		.hit(), // input with collision later
+// 		.player_X_position(player_Xsig),
+// 		.bullet_X(bullet_Xsig),
+// 		.bullet_Y(bullet_Ysig),	
+// 		.bullet_on_screen(bulletsig)
+// 		);
 
-logic background_on;
-logic [7:0] bg_R, bg_G, bg_B;
+// logic background_on;
+// logic [7:0] bg_R, bg_G, bg_B;
 
-background my_background(
-	.Reset(Reset_h),
-	.frame_clk(VGA_Clk),
-	.Clk(pixel_clk),
-	.is_playing(is_playing),
-	.DrawX(drawxsig),
-	.DrawY(drawysig),
-	.start(start),
-	.enemy_on(background_on),
-	.bg_R,
-	.bg_G,
-	.bg_B
-);
+// background my_background(
+// 	.Reset(Reset_h),
+// 	.frame_clk(VGA_Clk),
+// 	.Clk(pixel_clk),
+// 	.is_playing(is_playing),
+// 	.DrawX(drawxsig),
+// 	.DrawY(drawysig),
+// 	.start(start),
+// 	.enemy_on(background_on),
+// 	.bg_R,
+// 	.bg_G,
+// 	.bg_B
+// );
 
 color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),
 				.bullet_in(bulletsig),
-				.bulletX(bullet_Xsig),
-				.bulletY(bullet_Ysig),
 				.player_color(player_color),
 				.Red(Red),
 				.Green(Green),
-				.Blue(Blue).
-				.enemy_on,
-				.enemy_R,
-				.enemy_G,
-				.enemy_B,
-				.bg_R,
-				.bg_G,
-				.bg_B
-				);
+				.Blue(Blue),
+				// .enemy_on,
+				// .enemy_R,
+				// .enemy_B,
+				// .bg_R,
+				// .bg_G,
+				// .bg_B
+				.player_on(player_on)
+			//	.enemy_on(1'b0)
+);
 
 endmodule
+ // Need to edit these.

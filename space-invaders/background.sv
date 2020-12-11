@@ -33,7 +33,7 @@ module enemy_medium(
         .data_in(5'b0),
         .write_address(19'b0),
         .read_address(read_addr),
-        .we(0'b0),
+        .we(1'b0),
         .Clk(Clk),
         .data_out({enemy_sprite_R, enemy_sprite_G, enemy_sprite_B})
     );
@@ -114,6 +114,7 @@ module enemy_medium(
             NEXT_LINE:  state_next = AWAIT_POS;
             FINISHED:   state_next = is_playing ? IDLE:FINISHED;
             default:    state_next = IDLE;
+        endcase
     end
     
 endmodule
