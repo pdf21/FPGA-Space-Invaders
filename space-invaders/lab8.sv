@@ -191,6 +191,7 @@ player u4(
 	.player_color(player_color)
 );
 
+logic is_playing
 
 gameFSM fsm_inst(
 					.reset(Reset_h),
@@ -198,14 +199,15 @@ gameFSM fsm_inst(
 					.keycode(keycode),
 					.finished(),
 					.start(),
-					.is_playing(),
+					.is_playing(is_playing),
 					.is_finished()
 );
 
 bullet u2(.Reset(Reset_h),
 		.frame_clk(VGA_Clk),
 		.keycode(keycode),
-		.hit(), // input with collision later
+		.ready_game(is_playing),
+		.hit(), // input with collision
 		.player_X_position(player_Xsig),
 		.bullet_X(bullet_Xsig),
 		.bullet_Y(bullet_Ysig),	
@@ -252,14 +254,13 @@ color_mapper u3(.DrawX(drawxsig),
 				.Red(Red),
 				.Green(Green),
 				.Blue(Blue),
-				// .enemy_on,
-				// .enemy_R,
-				// .enemy_B,
-				// .bg_R,
-				// .bg_G,
-				// .bg_B
+				.enemy_on,
+				.enemy_R,
+				.enemy_B,
+				.bg_R,
+				.bg_G,
+				.bg_B
 				.player_on(player_on)
-			//	.enemy_on(1'b0)
 );
 
 endmodule

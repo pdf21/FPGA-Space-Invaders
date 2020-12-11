@@ -1,7 +1,7 @@
 module bullet(
     input Reset, input frame_clk, input [7:0] keycode,
     input [9:0] player_X_position,
-    input hit,
+    input ready_game, hit
     output [9:0] bullet_X, bullet_Y,
     output bullet_on_screen // logic for whether or not the bullet should be there.
 );
@@ -16,10 +16,12 @@ parameter bullet_Y_start = 136;
 
 always_ff @ (posedge frame_clk or posedge Reset)
 begin: bullet_move
+if(ready_game)
+begin
     if(Reset) begin
-        exists <= 1'b0;
-        bullet_Y_motion <= 0;
-        bullet_Y_pos <= bullet_Y_start;
+    exists <= 1'b0;
+    bullet_Y_motion <= 0;
+    bullet_Y_pos <= bullet_Y_start;
     end
     else begin
             if(keycode == 8'h44) // keycode for space
@@ -44,6 +46,7 @@ begin: bullet_move
     travel <= exists;
     bullet_Y_pos <= bullet_Y_pos + bullet_Y_motion;
     bullet_X_pos <= player_X_position;
+end
 end
 
 assign bullet_X = bullet_X_pos;
