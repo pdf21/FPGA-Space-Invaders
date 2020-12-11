@@ -36,15 +36,15 @@ end
 // handling next state
 always_ff @ (posedge clk) begin
     case (state)
-        BEGIN: next_state = (keycode > 0) ? GAME_START : BEGIN; // press any key
+        BEGINNING: next_state = (keycode > 0) ? GAME_START : BEGINNING; // press any key
         GAME_START: next_state = CONT;
         GAME_OVER: next_state = (keycode == 8'd44) ? GAME_START : GAME_OVER; // PRESS SPACE
         CONT: finished ? GAME_OVER : CONT;
-        default: BEGIN;
+        default: BEGINNING;
     endcase
     if(reset)
     begin
-        next_state = BEGIN;
+        next_state = BEGINNING;
     end
 end
 
