@@ -191,32 +191,43 @@ player u4(
 	.player_color(player_color)
 );
 
-// bullet u2(.Reset(Reset_h),
-// 		.frame_clk(vssig),
-// 		.keycode(keycode),
-// 		.hit(), // input with collision later
-// 		.player_X_position(player_Xsig),
-// 		.bullet_X(bullet_Xsig),
-// 		.bullet_Y(bullet_Ysig),	
-// 		.bullet_on_screen(bulletsig)
-// 		);
 
-// logic background_on;
-// logic [7:0] bg_R, bg_G, bg_B;
+gameFSM fsm_inst(
+					.reset(Reset_h),
+					.clk(Clk),
+					.keycode(keycode),
+					.finished(),
+					.start(),
+					.is_playing(),
+					.is_finished()
+);
 
-// background my_background(
-// 	.Reset(Reset_h),
-// 	.frame_clk(VGA_Clk),
-// 	.Clk(pixel_clk),
-// 	.is_playing(is_playing),
-// 	.DrawX(drawxsig),
-// 	.DrawY(drawysig),
-// 	.start(start),
-// 	.enemy_on(background_on),
-// 	.bg_R,
-// 	.bg_G,
-// 	.bg_B
-// );
+bullet u2(.Reset(Reset_h),
+		.frame_clk(VGA_Clk),
+		.keycode(keycode),
+		.hit(), // input with collision later
+		.player_X_position(player_Xsig),
+		.bullet_X(bullet_Xsig),
+		.bullet_Y(bullet_Ysig),	
+		.bullet_on_screen(bulletsig)
+		);
+
+logic background_on;
+logic [7:0] bg_R, bg_G, bg_B;
+
+background my_background(
+	.Reset(Reset_h),
+	.frame_clk(VGA_Clk),
+	.Clk(Clk),
+	.is_playing(is_playing),
+	.DrawX(drawxsig),
+	.DrawY(drawysig),
+	.start(start),
+	.enemy_on(background_on),
+	.bg_R,
+	.bg_G,
+	.bg_B
+);
 
 // enemy_array my_enemy_array(
 // 	.Clk,
