@@ -1,9 +1,9 @@
 module enemy_medium(
-    input   logic Reset, input logic frame_clk, input logic [7:0] keycode, input logic Clk,
+    input   logic Reset, input logic frame_clk, input logic Clk, input is_playing,
     input   logic [9:0] DrawX, DrawY,
-    input   logic start_background,
+    input   logic start,
     output  logic enemy_on,
-    output  logic [7:0] enemy_R, enemy_G, enemy_B
+    output  logic [7:0] bg_R, bg_G, bg_B
 );
     logic   enemy_enable;
     logic   [9:0] enemy_x, enemy_y, next_enemy_y;
@@ -23,7 +23,11 @@ module enemy_medium(
         NEXT_LINE       // wait for next row
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
-
+    always_comb begin
+        if(is_playing == 1'b1) begin
+            start_background = 1'b1;
+        end
+    end
 
     backgroundRAM my_background(
         .data_in(5'b0),
@@ -39,9 +43,9 @@ module enemy_medium(
     // always happens:
     always_comb begin
         if(enemy_on == 1'b1) begin
-            enemy_R <= enemy_sprite_R;
-            enemy_G <= enemy_sprite_G;
-            enemy_B <= enemy_sprite_B;
+            bg_R <= enemy_sprite_R;
+            bg_G <= enemy_sprite_G;
+            bg_B <= enemy_sprite_B;
         end
         else begin
             enemy_R <= 8'b0;
@@ -74,6 +78,13 @@ module enemy_medium(
                enemy_y <= enemy_y + 1;
                enemy_on <= 1'b0;
            end
+            if (state == BEFORE_GAME_START) begin
+                enemy_on <= 1'b0;
+            end
+
+            if (state == FINISHED) begin
+                enemy_on <= 1'b0;
+            end
 
            if(Reset) begin
                state <= IDLE;
@@ -95,11 +106,13 @@ module enemy_medium(
 
     always_comb begin
         case(state)
-            IDLE:       state_next = start_background ? START: IDLE;
+            BEFORE_GAME_START: state_next = start_game ? IDLE : BEFORE_GAME_START;
+            IDLE:       state_next = is_playing ? START: IDLE;
             START:      state_next = AWAIT_POS;
             AWAIT_POS:  state_next = enemy_x == Draw_X ? DRAW : AWAIT_POS;
             DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
+            FINISHED:   state_next = is_playing ? IDLE:FINISHED;
             default:    state_next = IDLE;
     end
     

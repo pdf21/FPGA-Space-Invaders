@@ -1,5 +1,5 @@
 module enemy_medium(
-    input   logic Reset, frame_clk, Clk, delete_enemies, hit, 
+    input   logic Reset, frame_clk, Clk, delete_enemies, hit, is_playing
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
     input   logic [9:0] enemy_initial_x, enemy_initial_y,
@@ -25,19 +25,25 @@ module enemy_medium(
         START,          // game just started, await for sprite drawing
         AWAIT_POS,      // wait next horizontal position
         DRAW,           // output the RGB
-        NEXT_LINE       // wait for next row
+        NEXT_LINE,       // wait for next row
+        FINISHED,
+        FIRST_IDLE
     } state, next_state;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
-
+    initial begin
+        state <= BEFORE_GAME;
+    end
     always_ff @(posedge frame_clk) begin
-        if(enemy_direction_X == 0'b0) begin
-            enemy_start_x <= enemy_start_x - 1;
-        end
-        else begin
-            enemy_start_x <= enemy_start_x + 1;
-        end
-        if(enemy_direction_X == 1)begin
-            enemy_start_y <= enemy_start_y - 1;
+        if(state != BEFORE_GAME) begin
+            if(enemy_direction_X == 0'b0) begin
+                enemy_start_x <= enemy_start_x - 1;
+            end
+            else begin
+                enemy_start_x <= enemy_start_x + 1;
+            end
+            if(enemy_direction_X == 1)begin
+                enemy_start_y <= enemy_start_y - 1;
+            end            
         end
     end
 
@@ -86,6 +92,11 @@ module enemy_medium(
                enemy_on <= 1'b1;
            end
 
+            if(state == FIRST_IDLE) begin
+                enemy_y <= 0;
+                enemy_x <= 0;
+            end
+
            if(state == NEXT_LINE) begin
                enemy_y <= enemy_y + 1;
                enemy_on <= 1'b0;
@@ -95,15 +106,15 @@ module enemy_medium(
                 enemy_on <= 1'b0;
             end
 
-           if(Reset) begin
-               state <= IDLE;
+            if (state == BEFORE_GAME) begin
+                
                enemy_start_x = enemy_initial_x;
                enemy_start_y = enemy_initial_y;               
                enemy_x <= 0;
                enemy_y <= 0;
                pos <= 0;
                enemy_on <= 1'b0;
-           end
+            end
     end
              
     logic final_pixel;
@@ -120,13 +131,18 @@ module enemy_medium(
         temp_Draw_X <= Draw_X - enemy_start_x;
         temp_Draw_Y <= Draw_Y - enemy_start_Y;
         assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
+
+        // implement state to differentiate between start of frame and start drawing
         case(state)
-            IDLE:       state_next = start & ready ? START: IDLE;
+            BEFORE_GAME: state_next = start ? FIRST_IDLE : BEFORE_GAME;
+            FIRST_IDLE: ready ? DRAW : FIRST_IDLE;
+            IDLE:       state_next = is_playing ? START : IDLE;
             START:      state_next = AWAIT_POS;
             AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
-            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
+            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : FIRST_IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
-            default:    state_next = IDLE;
+            FINISHED: state_next = start ? FIRST_IDLE : FINISHED;
+            default:    state_next = BEFORE_GAME;            
         endcase
         if(delete_enemies == 1'b1) begin
             state_next <= FINISHED;
@@ -134,6 +150,10 @@ module enemy_medium(
 
         if(enemy_on == 1'b1 & hit ==1'b1) begin
             state_next <= FINISHED;
+        end
+
+        if(Reset == 1'b1) begin
+            state_next <= BEFORE_GAME;
         end
     end
     

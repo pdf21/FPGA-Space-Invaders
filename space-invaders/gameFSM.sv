@@ -1,27 +1,50 @@
 module gameFSM(
-    input reset, input [19:0] invaders_left, input clk,
-    input invader_line[3:0],
-    output FSMout
+    input reset,  input clk, input player_start, input finished, 
+    output start, is_playing, is_finished
 );
 
-parameter BEGIN = 2'b00;
-parameter CONT = 2'b01;
-parameter WIN = 2'b10;
-parameter GAMEOVER = 2'b11;
+enum {
+    BEGIN,
+    GAME_START,
+    GAME_OVER,
+    CONT
+} state, next_state;
 
-initial
-begin
-    FSMout = BEGIN;
+// outputs at each state
+always_ff @ (posedge clk) begin
+    state <= next_state;
+
+    if(state == BEGIN) begin
+        start <= 1'b0;
+    end
+
+    if(state == GAME_START) begin
+        start <= 1'b1;
+    end
+
+    if(state == GAME_OVER) begin
+        start <= 1'b0;
+        is_finished <= 1'b1;
+    end
+
+    if(state == CONT) begin
+        start <= 1'b0;
+        is_playing <= 1'b1;
+    end
 end
 
-always_ff (posedge clk)
-begin
-    if(reset) 
-        FSMout <= BEGIN; // Resets the game from the beginning.
-    else if(invader_line == 14) // NEED TO INSERT CONDITION FOR INVADER LINE.
-        FSMout <= GAMEOVER; // means that you lose 
-    else if(invaders_left == 0)
-        FSMout <= BEGIN;
-    else
-        FSMout <= CONT; // continue with the game
+// handling next state
+always_ff @ (posedge clk) begin
+    case (state)
+        BEGIN: next_state = player_start ? GAME_START : BEGIN;
+        GAME_START: next_state = CONT;
+        GAME_OVER: next_state = player_start ? GAME_START : GAME_OVER;
+        CONT: finished ? GAME_OVER : CONT;
+        default: BEGIN;
+    endcase
+    if(reset) begin
+        next_state = BEGIN;
+    end
 end
+
+endmodule

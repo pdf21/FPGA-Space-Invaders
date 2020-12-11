@@ -17,7 +17,7 @@ module player(
     
     logic [9:0] player_start_X, player_start_Y;
 
-    int IMAGE_WIDTH = 10'd36;
+    int IMAGE_WIDTH = 10'd36; 
     int IMAGE_HEIGHT = 10'd40;
     
     logic [18:0] pos; // position within memory array
@@ -55,13 +55,14 @@ module player(
 
     if(state == START) begin
         player_Y_Pos <= 0;
-        player_X_Motion = <= 0;
+        player_X_Motion <= 0;
         pos <= 0;
         player_on <= 1'b0;
     end
 
     if(state == AWAIT_POS) begin
         player_X_Pos <= 0;
+        enemy_on <= 1'b1;
     end
 
     if(state == DRAW) begin
