@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+newSoftwareExampleWizardPage.defaultLocation=C\:\\Users\\rin19\\Desktop\\projects\\FPGA-Space-Invaders\\space-invaders\\software\\usb_kb
+newSoftwareExampleWizardPage.sopcinfoFile=C\:\\Users\\rin19\\Desktop\\projects\\FPGA-Space-Invaders\\space-invaders\\lab8_soc.sopcinfo
+newSoftwareExampleWizardPage2.newBspLocation=C\:\\Users\\rin19\\Desktop\\projects\\FPGA-Space-Invaders\\space-invaders\\software\\usb_kb_bsp

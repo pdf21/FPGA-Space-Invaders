@@ -1,12 +1,12 @@
 module enemy_array
 (
-    input   logic   Clk , frame_clk, Reset, Start, delete_enemies, hit, is_playing(is_playing,
+    input   logic   Clk , frame_clk, Reset, Start, hit, is_playing,
     input   logic   [9:0] DrawX, DrawY,
-    output  logic   enemy_on,
+    output  logic   enemy_on, finished,
     output  logic   [7:0] enemy_R, enemy_G, enemy_B
 );
     logic [9:0] L_Edge, R_Edge, U_Edge, D_Edge;
-    logic enemy_direction_X, enemy_direction_Y, delete_enemies;
+    logic delete_enemies;
 enum {
     INIT,
     MOVE_LEFT,
@@ -16,11 +16,34 @@ enum {
     LOST
 } state, next_state;
 
+always_comb begin
+	finished <= delete_enemies;
+end
+
+logic [4:0] enemy_counter;
+
+initial begin
+	enemy_counter <= 5'd16;
+end
+
+always_ff @ (posedge clk) begin
+	if (hit == 1'b1) begin
+		enemy_counter <= enemy_counter - 5'b01;
+	end
+end
+
+always_ff @ (posedge clk) begin
+	if (enemy_counter == 5'b00) begin
+		delete_enemies <= 1'b1;
+	end
+end
+
 //  logic for each states
 always_ff @(posedge frame_clk)begin
     state <= next_state;
 
     if(state == INIT) begin
+		  enemy_counter <= 5'd16;
         L_Edge <= 10'd0;
         R_Edge <= 10'd487;
         U_Edge <= 10'd0;
@@ -97,7 +120,8 @@ always_ff @(posedge Clk)begin
         MOVE_RIGHT:     state_next = !reached_edge ? MOVE_RIGHT : MOVE_DOWN_LEFT;
         MOVE_DOWN_RIGHT:state_next = !reached_max ? MOVE_RIGHT : LOST;
         MOVE_DOWN_LEFT: state_next = !reached_max ? MOVE_LEFT : LOST;
-end
+		endcase
+end 
 
 // output of enemy_on and enemy data
 always_comb begin

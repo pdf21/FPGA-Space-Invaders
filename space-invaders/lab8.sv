@@ -191,16 +191,16 @@ player u4(
 	.player_color(player_color)
 );
 
-logic is_playing
+logic is_playing, is_finished, start, finished;
 
 gameFSM fsm_inst(
 					.reset(Reset_h),
 					.clk(Clk),
 					.keycode(keycode),
-					.finished(),
-					.start(),
+					.finished(finished),
+					.start(start),
 					.is_playing(is_playing),
-					.is_finished()
+					.is_finished(is_finished)
 );
 
 bullet u2(.Reset(Reset_h),
@@ -231,25 +231,32 @@ background my_background(
 	.bg_B
 );
 
-// enemy_array my_enemy_array(
-// 	.Clk,
-// 	.frame_clk,
-// 	.Reset,
-// 	.Start,
-// 	.delete_enemies,
-// 	.hit,
-// 	.is_playing,
-// 	.DrawX,
-// 	.DrawY,
-// 	.enemy_on,
-// 	.enemy_R,
-// 	.enemy_G,
-// 	.enemy_B
-// );
+logic [7:0] enemy_R, enemy_G, enemy_B;
+logic enemy_on;
+
+enemy_array my_enemy_array(
+	.Clk(Clk),
+	.frame_clk(Vga_Clk),
+	.Reset(Reset_h),
+	.Start(start),
+	.finished(finished),
+	.hit,
+	.is_playing,
+	.DrawX(drawxsig),
+	.DrawY(drawysig),
+	.enemy_on(enemy_on),
+	.enemy_R,
+	.enemy_G,
+	.enemy_B
+);
+
+logic hit;
 
 color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),
 				.bullet_in(bulletsig),
+				.bullet_X(bullet_Xsig),
+				.bullet_Y(bullet_Ysig),
 				.player_color(player_color),
 				.Red(Red),
 				.Green(Green),
@@ -259,8 +266,9 @@ color_mapper u3(.DrawX(drawxsig),
 				.enemy_B,
 				.bg_R,
 				.bg_G,
-				.bg_B
-				.player_on(player_on)
+				.bg_B,
+				.player_on(player_on),
+				.hit
 );
 
 endmodule

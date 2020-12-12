@@ -1,4 +1,4 @@
-module enemy_medium(
+module background(
     input   logic Reset, input logic frame_clk, input logic Clk, input is_playing,
     input   logic [9:0] DrawX, DrawY,
     input   logic start,

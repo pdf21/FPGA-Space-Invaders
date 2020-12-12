@@ -1,5 +1,5 @@
-module enemy_medium(
-    input   logic Reset, frame_clk, Clk, delete_enemies, hit, is_playing
+module enemy_easy(
+    input   logic Reset, frame_clk, Clk, delete_enemies, hit, is_playing,
     input   logic enemy_direction_X, // 0 = move left, 1 = move right
     input   logic enemy_direction_Y, // 0 = stay, 1 = move down
     input   logic [9:0] enemy_initial_x, enemy_initial_y,
@@ -35,7 +35,7 @@ module enemy_medium(
     end
     always_ff @(posedge frame_clk) begin
         if(state != BEFORE_GAME) begin
-            if(enemy_direction_X == 0'b0) begin
+            if(enemy_direction_X == 1'b0) begin
                 enemy_start_x <= enemy_start_x - 1;
             end
             else begin
@@ -135,7 +135,7 @@ module enemy_medium(
         // implement state to differentiate between start of frame and start drawing
         case(state)
             BEFORE_GAME: state_next = start ? FIRST_IDLE : BEFORE_GAME;
-            FIRST_IDLE: ready ? DRAW : FIRST_IDLE;
+            FIRST_IDLE: state_next = ready ? DRAW : FIRST_IDLE;
             IDLE:       state_next = is_playing ? START : IDLE;
             START:      state_next = AWAIT_POS;
             AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
