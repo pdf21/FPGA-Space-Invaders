@@ -21,6 +21,7 @@ module enemy_hard(
     // find position in memory : DrawX - startX
     logic   [23:0] read_addr;
     enum {
+        BEFORE_GAME,
         IDLE,           // when dead or game have not yet started
         START,          // game just started, await for sprite drawing
         AWAIT_POS,      // wait next horizontal position
@@ -28,7 +29,7 @@ module enemy_hard(
         NEXT_LINE,       // wait for next row
         FINISHED,
         FIRST_IDLE
-    } state, next_state;
+    } state, state_next;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
     initial begin
         state <= BEFORE_GAME;
@@ -127,10 +128,11 @@ module enemy_hard(
     
     logic [9:0] temp_Draw_X;
     logic [9:0] temp_Draw_Y;
+    logic ready;
     always_comb begin
-        temp_Draw_X <= Draw_X - enemy_start_x;
-        temp_Draw_Y <= Draw_Y - enemy_start_Y;
-        assign ready = (temp_Draw_Y == enemy_Y && temp_Draw_X == enemy_X);
+        temp_Draw_X <= DrawX - enemy_start_x;
+        temp_Draw_Y <= DrawY - enemy_start_y;
+        assign ready = (temp_Draw_Y == enemy_y && temp_Draw_X == enemy_x);
 
         // implement state to differentiate between start of frame and start drawing
         case(state)
@@ -139,7 +141,7 @@ module enemy_hard(
             IDLE:       state_next = is_playing ? START : IDLE;
             START:      state_next = AWAIT_POS;
             AWAIT_POS:  state_next = enemy_x == temp_Draw_X ? DRAW : AWAIT_POS;
-            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : FIRST_IDLE);
+            DRAW:       state_next = !final_pixel ? DRAW : (!final_line ? NEXT_LINE : FIRST_IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
             FINISHED: state_next = start ? FIRST_IDLE : FINISHED;
             default:    state_next = BEFORE_GAME;            

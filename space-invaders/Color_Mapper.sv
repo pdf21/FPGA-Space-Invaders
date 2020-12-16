@@ -35,7 +35,7 @@ module  color_mapper (  input logic [9:0] DrawX, DrawY,
                         input logic [7:0] enemy_R, enemy_G, enemy_B,
                         input logic player_on,
                         input logic enemy_on,
-                        input logic [7:0] bg_R, bg_G, bg_B,
+                        // input logic [7:0] bg_R, bg_G, bg_B,
                        output logic [7:0]  Red, Green, Blue,
                         output logic hit);
     
@@ -71,21 +71,26 @@ module  color_mapper (  input logic [9:0] DrawX, DrawY,
     begin    
         if(bullet_in && DrawX == bulletX && DrawY < bulletY + 4 ) // Draws the bullet.
             begin
-                VGA_R <= 8'hFF;
-                VGA_G <= 8'hFF;
-                VGA_B <= 8'hFF;
+                VGA_R = 8'hFF;
+                VGA_G = 8'hFF;
+                VGA_B = 8'hFF;
             end
-        else if(entity_on)
+        if(player_on)
             begin
-                VGA_R <= entity_R;
-                VGA_G <= entity_G;
-                VGA_B <= entity_B;
+                VGA_R <= entity_data_R;
+                VGA_G <= entity_data_G;
+                VGA_B <= entity_data_B;
             end
+        else if (enemy_on) begin
+                VGA_R = enemy_R;
+                VGA_G = enemy_G;
+                VGA_B = enemy_B;
+        end
         else
             begin
-                VGA_R <= 8'b0;
-                VGA_G <= 8'b0;
-                VGA_B <= 8'b0;
+                VGA_R = 8'h00;
+                VGA_G = 8'h00;
+                VGA_B = 8'h00;
             end
             
     end 

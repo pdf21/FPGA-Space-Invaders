@@ -7,7 +7,8 @@ module background(
 );
     logic   enemy_enable;
     logic   [9:0] enemy_x, enemy_y, next_enemy_y;
-    parameter enemy_step_X, enemy_step_Y;
+    parameter enemy_step_X = 1;
+    parameter enemy_step_Y = 1;
 
     int IMAGE_WIDTH = 9'd640; 
     int IMAGE_HEIGHT = 9'd480;
@@ -20,9 +21,12 @@ module background(
         START,          // game just started, await for sprite drawing
         AWAIT_POS,      // wait next horizontal position
         DRAW,           // output the RGB
-        NEXT_LINE       // wait for next row
-    } state, next_state;
+        NEXT_LINE,       // wait for next row
+        BEFORE_GAME_START,
+        FINISHED
+    } state, state_next;
     // states IDLE, START, AWAIT_POS, DRAW, NEXT_LINE
+    logic start_background;
     always_comb begin
         if(is_playing == 1'b1) begin
             start_background = 1'b1;
@@ -41,6 +45,7 @@ module background(
              //  handling of next state
     // accessing memory = row no * width + col no
     // always happens:
+
     always_comb begin
         if(enemy_on == 1'b1) begin
             bg_R <= enemy_sprite_R;
@@ -48,9 +53,9 @@ module background(
             bg_B <= enemy_sprite_B;
         end
         else begin
-            enemy_R <= 8'b0;
-            enemy_G <= 8'b0;
-            enemy_B <= 8'b0;
+            bg_R <= 8'b0;
+            bg_G <= 8'b0;
+            bg_B <= 8'b0;
         end 
     end
 
@@ -106,11 +111,11 @@ module background(
 
     always_comb begin
         case(state)
-            BEFORE_GAME_START: state_next = start_game ? IDLE : BEFORE_GAME_START;
+            BEFORE_GAME_START: state_next = start ? IDLE : BEFORE_GAME_START;
             IDLE:       state_next = is_playing ? START: IDLE;
             START:      state_next = AWAIT_POS;
-            AWAIT_POS:  state_next = enemy_x == Draw_X ? DRAW : AWAIT_POS;
-            DRAW:       state_next = !last_pixel ? DRAW : (!last_line ? NEXT_LINE : IDLE);
+            AWAIT_POS:  state_next = enemy_x == DrawX ? DRAW : AWAIT_POS;
+            DRAW:       state_next = !final_pixel ? DRAW : (!final_line ? NEXT_LINE : IDLE);
             NEXT_LINE:  state_next = AWAIT_POS;
             FINISHED:   state_next = is_playing ? IDLE:FINISHED;
             default:    state_next = IDLE;

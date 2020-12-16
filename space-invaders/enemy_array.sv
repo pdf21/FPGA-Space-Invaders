@@ -14,10 +14,10 @@ enum {
     MOVE_DOWN_RIGHT,
     MOVE_DOWN_LEFT,
     LOST
-} state, next_state;
+} state, state_next;
 
 always_comb begin
-	finished <= delete_enemies;
+	finished = delete_enemies;
 end
 
 logic [4:0] enemy_counter;
@@ -25,30 +25,31 @@ logic [4:0] enemy_counter;
 initial begin
 	enemy_counter <= 5'd16;
 end
+logic delete_enemies_temp;
 
-always_ff @ (posedge clk) begin
-	if (hit == 1'b1) begin
+always_ff @ (posedge Clk) begin
+    if (hit == 1'b1) begin
 		enemy_counter <= enemy_counter - 5'b01;
 	end
-end
-
-always_ff @ (posedge clk) begin
-	if (enemy_counter == 5'b00) begin
-		delete_enemies <= 1'b1;
+	else if (enemy_counter == 5'b00) begin
+		delete_enemies_temp <= 1'b1;
 	end
 end
 
+logic enemy_direction_X, enemy_direction_Y;
 //  logic for each states
+
+logic delete_enemies_temp2;
 always_ff @(posedge frame_clk)begin
-    state <= next_state;
+    state <= state_next;
 
     if(state == INIT) begin
-		  enemy_counter <= 5'd16;
+		enemy_counter <= 5'd16;
         L_Edge <= 10'd0;
         R_Edge <= 10'd487;
         U_Edge <= 10'd0;
         D_Edge <= 10'd143;
-        delete_enemies <= 1'b0;
+        delete_enemies_temp2 <= 1'b0;
     end
     
     if(state == MOVE_LEFT) begin
@@ -84,7 +85,7 @@ always_ff @(posedge frame_clk)begin
     end
 
     if (state == LOST) begin
-        delete_enemies <= 1'b1;
+        delete_enemies_temp2 <= 1'b1;
     end
 end
 
@@ -115,7 +116,7 @@ end
 // next state handler
 always_ff @(posedge Clk)begin
     case(state)
-        INIT:           state_next = start ? MOVE_RIGHT : INIT;
+        INIT:           state_next = Start ? MOVE_RIGHT : INIT;
         MOVE_LEFT:      state_next = !reached_edge ? MOVE_LEFT : MOVE_DOWN_RIGHT;
         MOVE_RIGHT:     state_next = !reached_edge ? MOVE_RIGHT : MOVE_DOWN_LEFT;
         MOVE_DOWN_RIGHT:state_next = !reached_max ? MOVE_RIGHT : LOST;

@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE 10M50DAF484C7G
 set_global_assignment -name TOP_LEVEL_ENTITY lab8
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:26:30  NOVEMBER 12, 2020"
-set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -249,11 +249,11 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -entity DE10_LITE_Default -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE10_LITE_Default -section_id Top
 set_location_assignment PIN_P11 -to Clk
+set_global_assignment -name QIP_FILE lab8_soc/synthesis/lab8_soc.qip
 set_global_assignment -name SYSTEMVERILOG_FILE "On-Chip Memory/pink_invader-ram.sv"
 set_global_assignment -name SYSTEMVERILOG_FILE "On-Chip Memory/background-ram.sv"
 set_global_assignment -name SYSTEMVERILOG_FILE "On-Chip Memory/alien-ram.sv"
 set_global_assignment -name SYSTEMVERILOG_FILE "On-Chip Memory/alien_ship-ram.sv"
-set_global_assignment -name QSYS_FILE lab8_soc.qsys
 set_global_assignment -name SYSTEMVERILOG_FILE gameFSM.sv
 set_global_assignment -name SYSTEMVERILOG_FILE font_rom.sv
 set_global_assignment -name SYSTEMVERILOG_FILE enemy_medium.sv
@@ -263,10 +263,11 @@ set_global_assignment -name SYSTEMVERILOG_FILE enemy_array.sv
 set_global_assignment -name SYSTEMVERILOG_FILE background.sv
 set_global_assignment -name SYSTEMVERILOG_FILE "On-Chip Memory/player_sprite-ram.sv"
 set_global_assignment -name SYSTEMVERILOG_FILE HexDriver.sv
-set_global_assignment -name QIP_FILE lab8_soc/synthesis/lab8_soc.qip
 set_global_assignment -name SYSTEMVERILOG_FILE VGA_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE player.sv
 set_global_assignment -name SYSTEMVERILOG_FILE lab8.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Color_Mapper.sv
 set_global_assignment -name SYSTEMVERILOG_FILE bullet.sv
+set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "12.5 %"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

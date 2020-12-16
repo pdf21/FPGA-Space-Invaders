@@ -203,33 +203,33 @@ gameFSM fsm_inst(
 					.is_finished(is_finished)
 );
 
-bullet u2(.Reset(Reset_h),
-		.frame_clk(VGA_Clk),
-		.keycode(keycode),
-		.ready_game(is_playing),
-		.hit(), // input with collision
-		.player_X_position(player_Xsig),
-		.bullet_X(bullet_Xsig),
-		.bullet_Y(bullet_Ysig),	
-		.bullet_on_screen(bulletsig)
-		);
+// bullet u2(.Reset(Reset_h),
+// 		.frame_clk(VGA_Clk),
+// 		.keycode(keycode),
+// 		.ready_game(is_playing),
+// 		.hit(), // input with collision
+// 		.player_X_position(player_Xsig),
+// 		.bullet_X(bullet_Xsig),
+// 		.bullet_Y(bullet_Ysig),	
+// 		.bullet_on_screen(bulletsig)
+// 		);
 
-logic background_on;
-logic [7:0] bg_R, bg_G, bg_B;
+// logic background_on;
+// logic [7:0] bg_R, bg_G, bg_B;
 
-background my_background(
-	.Reset(Reset_h),
-	.frame_clk(VGA_Clk),
-	.Clk(Clk),
-	.is_playing(is_playing),
-	.DrawX(drawxsig),
-	.DrawY(drawysig),
-	.start(start),
-	.enemy_on(background_on),
-	.bg_R,
-	.bg_G,
-	.bg_B
-);
+// background my_background(
+// 	.Reset(Reset_h),
+// 	.frame_clk(VGA_Clk),
+// 	.Clk(Clk),
+// 	.is_playing(is_playing),
+// 	.DrawX(drawxsig),
+// 	.DrawY(drawysig),
+// 	.start(start),
+// 	.enemy_on(background_on),
+// 	.bg_R,
+// 	.bg_G,
+// 	.bg_B
+// );
 
 logic [7:0] enemy_R, enemy_G, enemy_B;
 logic enemy_on;
@@ -255,8 +255,8 @@ logic hit;
 color_mapper u3(.DrawX(drawxsig),
 				.DrawY(drawysig),
 				.bullet_in(bulletsig),
-				.bullet_X(bullet_Xsig),
-				.bullet_Y(bullet_Ysig),
+				.bulletX(bullet_Xsig),
+				.bulletY(bullet_Ysig),
 				.player_color(player_color),
 				.Red(Red),
 				.Green(Green),
@@ -264,9 +264,9 @@ color_mapper u3(.DrawX(drawxsig),
 				.enemy_on,
 				.enemy_R,
 				.enemy_B,
-				.bg_R,
-				.bg_G,
-				.bg_B,
+				// .bg_R,
+				// .bg_G,
+				// .bg_B,
 				.player_on(player_on),
 				.hit
 );

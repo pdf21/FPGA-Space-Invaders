@@ -10,7 +10,7 @@
    <inputclock preferredWidth="206" />
   </columns>
  </systemtable>
- <library expandedCategories="Library,Project" />
- <window width="1920" height="945" x="0" y="95" />
+ <library expandedCategories="Project,Library" />
+ <window width="3232" height="1756" x="-16" y="-16" />
  <hdlexample language="VERILOG" />
 </preferences>

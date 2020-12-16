@@ -40,7 +40,7 @@ always_ff @ (posedge clk) begin
         GAME_START: next_state = CONT;
         GAME_OVER: next_state = (keycode == 8'd44) ? GAME_START : GAME_OVER; // PRESS SPACE
         CONT: next_state = finished ? GAME_OVER : CONT;
-        default: BEGINNING;
+        default: next_state = BEGINNING;
     endcase
     if(reset)
     begin

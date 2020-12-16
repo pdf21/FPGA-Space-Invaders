@@ -1,6 +1,6 @@
 Flow report for Space-Invaders
-Fri Dec 11 18:18:20 2020
-Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Wed Dec 16 16:01:32 2020
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -40,24 +40,24 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Flow Failed - Fri Dec 11 18:18:20 2020      ;
-; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; Flow Status                        ; Successful - Wed Dec 16 16:01:14 2020       ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Space-Invaders                              ;
 ; Top-level Entity Name              ; lab8                                        ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; N/A until Partition Merge                   ;
-;     Total combinational functions  ; N/A until Partition Merge                   ;
-;     Dedicated logic registers      ; N/A until Partition Merge                   ;
-; Total registers                    ; N/A until Partition Merge                   ;
-; Total pins                         ; N/A until Partition Merge                   ;
-; Total virtual pins                 ; N/A until Partition Merge                   ;
-; Total memory bits                  ; N/A until Partition Merge                   ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                   ;
-; Total PLLs                         ; N/A until Partition Merge                   ;
-; UFM blocks                         ; N/A until Partition Merge                   ;
-; ADC blocks                         ; N/A until Partition Merge                   ;
+; Total logic elements               ; 3,864 / 49,760 ( 8 % )                      ;
+;     Total combinational functions  ; 3,274 / 49,760 ( 7 % )                      ;
+;     Dedicated logic registers      ; 2,423 / 49,760 ( 5 % )                      ;
+; Total registers                    ; 2492                                        ;
+; Total pins                         ; 141 / 360 ( 39 % )                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 11,392 / 1,677,312 ( < 1 % )                ;
+; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
+; UFM blocks                         ; 0 / 1 ( 0 % )                               ;
+; ADC blocks                         ; 0 / 2 ( 0 % )                               ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/11/2020 18:16:48 ;
+; Start date & time ; 12/16/2020 15:58:20 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Space-Invaders      ;
 +-------------------+---------------------+
@@ -77,7 +77,8 @@ refer to the applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------+----------------+-------------------+------------+
 ; Assignment Name                     ; Value                                                      ; Default Value  ; Entity Name       ; Section Id ;
 +-------------------------------------+------------------------------------------------------------+----------------+-------------------+------------+
-; COMPILER_SIGNATURE_ID               ; 57353105635826.160773220804760                             ; --             ; --                ; --         ;
+; COMPILER_SIGNATURE_ID               ; 273105148273801.160810910017640                            ; --             ; --                ; --         ;
+; FLOW_ENABLE_POWER_ANALYZER          ; On                                                         ; Off            ; --                ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                         ; --             ; --                ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                          ; --             ; --                ; --         ;
 ; MISC_FILE                           ; lab8_soc/synthesis/../lab8_soc.cmp                         ; --             ; --                ; --         ;
@@ -93,11 +94,12 @@ refer to the applicable agreement for further details.
 ; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family)                     ; --             ; DE10_LITE_Default ; Top        ;
 ; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family)                     ; --             ; lab8              ; Top        ;
 ; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                                        ; --             ; --                ; --         ;
+; POWER_DEFAULT_INPUT_IO_TOGGLE_RATE  ; 12.5 %                                                     ; 12.5%          ; --                ; --         ;
 ; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                      ; --             ; --                ; --         ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                               ; --             ; --                ; --         ;
 ; SLD_FILE                            ; lab8_soc/synthesis/lab8_soc.regmap                         ; --             ; --                ; --         ;
 ; SLD_FILE                            ; lab8_soc/synthesis/lab8_soc.debuginfo                      ; --             ; --                ; --         ;
-; SLD_INFO                            ; QSYS_NAME lab8_soc HAS_SOPCINFO 1 GENERATION_ID 1607731387 ; --             ; lab8_soc          ; --         ;
+; SLD_INFO                            ; QSYS_NAME lab8_soc HAS_SOPCINFO 1 GENERATION_ID 1608050486 ; --             ; lab8_soc          ; --         ;
 ; SOPCINFO_FILE                       ; lab8_soc/synthesis/../../lab8_soc.sopcinfo                 ; --             ; --                ; --         ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                         ; --             ; --                ; --         ;
 ; TOP_LEVEL_ENTITY                    ; lab8                                                       ; Space-Invaders ; --                ; --         ;
@@ -109,8 +111,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:34     ; 1.0                     ; 4724 MB             ; 00:02:11                           ;
-; Total                ; 00:01:34     ; --                      ; --                  ; 00:02:11                           ;
+; Analysis & Synthesis ; 00:01:23     ; 1.0                     ; 4983 MB             ; 00:02:12                           ;
+; Fitter               ; 00:00:49     ; 1.2                     ; 5418 MB             ; 00:01:08                           ;
+; Assembler            ; 00:00:07     ; 1.0                     ; 4696 MB             ; 00:00:06                           ;
+; Power Analyzer       ; 00:00:21     ; 1.2                     ; 4884 MB             ; 00:00:26                           ;
+; Timing Analyzer      ; 00:00:16     ; 1.4                     ; 4835 MB             ; 00:00:20                           ;
+; Total                ; 00:02:56     ; --                      ; --                  ; 00:04:12                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -119,7 +125,11 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Rindra           ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; LAPTOP-FVIIQ0E9  ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; LAPTOP-FVIIQ0E9  ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; LAPTOP-FVIIQ0E9  ; Windows 10 ; 10.0       ; x86_64         ;
+; Power Analyzer       ; LAPTOP-FVIIQ0E9  ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; LAPTOP-FVIIQ0E9  ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -127,6 +137,10 @@ refer to the applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off Space-Invaders -c Space-Invaders
+quartus_fit --read_settings_files=off --write_settings_files=off Space-Invaders -c Space-Invaders
+quartus_asm --read_settings_files=off --write_settings_files=off Space-Invaders -c Space-Invaders
+quartus_pow --read_settings_files=off --write_settings_files=off Space-Invaders -c Space-Invaders
+quartus_sta Space-Invaders -c Space-Invaders
 
 
 
